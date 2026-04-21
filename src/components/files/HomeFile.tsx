@@ -59,7 +59,7 @@ export default function HomeFile({ hasBeenOpened }: Props) {
         {/* NAME */}
         <Line num={3}>
           <motion.div initial={{ opacity: 0, scale: 0.95, y: 5 }} animate={{ opacity: 1, scale: 1, y: 0 }} transition={{ duration: 0.4, delay: dly(0.4) }}>
-            <div className="hero-name text-[65px] md:text-[90px] leading-[0.9] text-white mb-1">
+            <div className="hero-name text-[50px] md:text-[70px] leading-[0.9] text-white mb-1">
               Bussa
             </div>
           </motion.div>
@@ -68,7 +68,7 @@ export default function HomeFile({ hasBeenOpened }: Props) {
         <Line num={4}>
           <motion.div initial={{ opacity: 0, scale: 0.95, y: 5 }} animate={{ opacity: 1, scale: 1, y: 0 }} transition={{ duration: 0.4, delay: dly(0.5) }}>
             <div style={{ display: 'inline-block' }}>
-              <div className="hero-name text-[65px] md:text-[90px] leading-[0.9] text-[#00D4FF] mb-2">
+              <div className="hero-name text-[50] md:text-[70px] leading-[0.9] text-[#00D4FF] mb-1">
                 Surya
               </div>
 
