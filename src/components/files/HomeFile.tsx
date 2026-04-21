@@ -1,144 +1,203 @@
 'use client';
 import { motion } from 'framer-motion';
-import { useState, useEffect } from 'react';
+import { SiGithub, SiLeetcode } from 'react-icons/si';
+import { FaLinkedin } from 'react-icons/fa';
+import { FiMail } from 'react-icons/fi';
+import { useStore } from '../../store/useStore';
 
-const typeText = "/** Welcome to my portfolio */";
+const rolesData = [
+  { name: 'Full Stack Dev', color: 'bg-[#16A34A]' },
+  { name: 'AI / ML Dev', color: 'bg-[#00D4FF]' },
+  { name: 'Cloud Engineer', color: 'bg-[#0EA5E9]' },
+  { name: 'DevOps', color: 'bg-[#D97706]' }
+];
 
 interface Props {
   hasBeenOpened: boolean;
 }
 
+const Line = ({ num, children, className = "" }: { num: number, children: React.ReactNode, className?: string }) => (
+  <div className={`flex w-full group ${className}`}>
+    <span className="text-[#858585] min-w-[3.5rem] tracking-wide text-right pr-6 select-none block shrink-0 font-mono">{num}</span>
+    <div className="flex-1 shrink-0">{children}</div>
+  </div>
+);
+
 export default function HomeFile({ hasBeenOpened }: Props) {
-  const [typedText, setTypedText] = useState(hasBeenOpened ? typeText : '');
-  
-  useEffect(() => {
-    if (hasBeenOpened) return;
-    let i = 0;
-    const intervalId = setInterval(() => {
-      setTypedText(typeText.substring(0, i));
-      i++;
-      if (i > typeText.length) clearInterval(intervalId);
-    }, 30);
-    return () => clearInterval(intervalId);
-  }, [hasBeenOpened]);
+  const { openFile } = useStore();
 
-  const init = hasBeenOpened ? "visible" : "hidden";
-
-  const containerVar = {
-    hidden: { opacity: 0 },
-    visible: { opacity: 1, transition: { duration: 0.2, ease: "easeOut" } }
-  };
-
-  const mainHeadingVar = {
-    hidden: { opacity: 0, scale: 0.96 },
-    visible: { opacity: 1, scale: 1, transition: { duration: 0.3, delay: hasBeenOpened ? 0 : 0.8 } }
-  };
-
-  const tagContainerVar = {
-    hidden: {},
-    visible: { transition: { staggerChildren: 0.1, delayChildren: hasBeenOpened ? 0 : 1.1 } }
-  };
-
-  const tagVar = {
-    hidden: { opacity: 0, y: 10 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.2, ease: "easeOut" } }
-  };
-
-  const btnVar = {
-    hidden: { opacity: 0 },
-    visible: { opacity: 1, transition: { duration: 0.3, delay: hasBeenOpened ? 0 : 1.5 } }
-  };
+  const dly = (n: number) => hasBeenOpened ? 0 : n;
 
   return (
-    <motion.div 
-      initial={init}
-      animate="visible"
-      variants={containerVar}
-      className="pt-2 px-6 font-mono text-[13px] text-[#cccccc] leading-[18px] w-full h-full"
-    >
-      <div className="flex">
-        <span className="text-[#858585] min-w-[3em] text-right pr-4 select-none block">1</span>
-        <div className="text-[#6A9955] inline-block">
-          {typedText}
-          <span className="inline-block w-[8px] h-[15px] bg-[#cccccc] ml-[1px] animate-pulse align-middle" />
-        </div>
-      </div>
-      <div className="flex">
-        <span className="text-[#858585] min-w-[3em] text-right pr-4 select-none block">2</span>
-        <span className="text-[#6A9955]">// I'm a passionate developer building interactive web experiences.</span>
-      </div>
-      <div className="flex"><span className="text-[#858585] min-w-[3em] text-right pr-4 select-none block">3</span></div>
-      
-      <motion.div variants={mainHeadingVar} className="flex flex-col">
-        <div className="flex">
-          <span className="text-[#858585] min-w-[3em] text-right pr-4 select-none block">4</span>
-          <span><span className="text-[#569cd6]">const</span> <span className="text-[#4fc1ff]">developer</span> <span className="text-[#d4d4d4]">=</span> <span className="text-[#ffd700]">{'{'}</span></span>
-        </div>
-        <div className="flex">
-          <span className="text-[#858585] min-w-[3em] text-right pr-4 select-none block">5</span>
-          <span className="pl-6"><span className="text-[#9cdafe]">name:</span> <span className="text-[#ce9178]">"Surya"</span>,</span>
-        </div>
-        <div className="flex">
-          <span className="text-[#858585] min-w-[3em] text-right pr-4 select-none block">6</span>
-          <span className="pl-6 flex flex-wrap items-center">
-            <span className="text-[#9cdafe] mr-2">roles:</span> <span className="text-[#ffd700]">[</span>
-            <motion.div variants={tagContainerVar} initial={init} animate="visible" className="flex ml-2 space-x-2">
-              {["Frontend Engineer", "Full Stack Developer", "UX Enthusiast"].map((role, i) => (
-                <motion.span key={i} variants={tagVar} className="text-[#ce9178] border border-[#ce9178]/30 px-1.5 py-0.5 rounded text-xs bg-[#ce9178]/10 cursor-default hover:bg-[#ce9178]/20 transition-colors">
-                  "{role}"{i < 2 ? ',' : ''}
-                </motion.span>
-              ))}
-            </motion.div>
-            <span className="text-[#ffd700] ml-2">]</span>,
-          </span>
-        </div>
-        <div className="flex">
-          <span className="text-[#858585] min-w-[3em] text-right pr-4 select-none block">7</span>
-          <span className="pl-6"><span className="text-[#9cdafe]">status:</span> <span className="text-[#ce9178]">"Open to new opportunities"</span></span>
-        </div>
-        <div className="flex">
-          <span className="text-[#858585] min-w-[3em] text-right pr-4 select-none block">8</span>
-          <span><span className="text-[#ffd700]">{'}'}</span>;</span>
-        </div>
-      </motion.div>
-      
-      <div className="flex"><span className="text-[#858585] min-w-[3em] text-right pr-4 select-none block">9</span></div>
-      
-      <div className="flex flex-col">
-        <div className="flex">
-          <span className="text-[#858585] min-w-[3em] text-right pr-4 select-none block">10</span>
-          <span><span className="text-[#c586c0]">export</span> <span className="text-[#c586c0]">default</span> <span className="text-[#569cd6]">function</span> <span className="text-[#dcdcaa]">Home</span>() <span className="text-[#ffd700]">{'{'}</span></span>
-        </div>
-        <div className="flex">
-          <span className="text-[#858585] min-w-[3em] text-right pr-4 select-none block">11</span>
-          <span className="pl-6 text-[#c586c0]">return <span className="text-[#da70d6]">(</span></span>
-        </div>
-        <div className="flex">
-          <span className="text-[#858585] min-w-[3em] text-right pr-4 select-none block">12</span>
-          <span className="pl-12 text-[#808080]">&lt;<span className="text-[#569cd6]">div</span> <span className="text-[#9cdafe]">className</span>=<span className="text-[#ce9178]">"hero-actions"</span>&gt;</span>
-        </div>
-        
-        <div className="flex">
-          <span className="text-[#858585] min-w-[3em] text-right pr-4 select-none block">13</span>
-          <motion.div variants={btnVar} initial={init} animate="visible" className="pl-16 flex space-x-4 my-2">
-            <button className="bg-[#0e639c] text-white px-5 py-1.5 rounded text-xs shadow-md shadow-black/20 hover:bg-[#1177bb] transition-all hover:-translate-y-0.5 active:translate-y-0">&lt;Projects /&gt;</button>
-            <button className="bg-transparent border border-[#0e639c] text-[#cccccc] px-5 py-1.5 rounded text-xs hover:bg-white/5 transition-all hover:-translate-y-0.5 active:translate-y-0">&lt;Contact /&gt;</button>
+    <>
+      {/* Roc Grotesk ExtraWide ExtraBold Font */}
+      <style>{`
+        @font-face {
+          font-family: 'RocGroteskWide';
+          src: url('/fonts/RocGrotesk-ExtraWide-ExtraBold.woff2') format('woff2'),
+               url('/fonts/RocGrotesk-ExtraWide-ExtraBold.woff') format('woff');
+          font-weight: 800;
+          font-style: normal;
+          font-display: swap;
+        }
+        .hero-name {
+          font-family: 'RocGroteskWide', sans-serif;
+          font-weight: 800;
+        }
+      `}</style>
+
+      <div className="pt-6 pb-12 w-full h-full overflow-y-auto custom-scrollbar font-mono text-[14px] leading-[24px] flex flex-col text-[#d4d4d4] bg-[#1e1e1e]">
+
+        {/* HEADER */}
+        <Line num={1}>
+          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5, delay: dly(0.2) }} className="text-[#6A9955]">
+            {'// hello world !! Welcome to my portfolio'}
           </motion.div>
-        </div>
-        
-        <div className="flex">
-          <span className="text-[#858585] min-w-[3em] text-right pr-4 select-none block">14</span>
-          <span className="pl-12 text-[#808080]">&lt;/<span className="text-[#569cd6]">div</span>&gt;</span>
-        </div>
-        <div className="flex">
-          <span className="text-[#858585] min-w-[3em] text-right pr-4 select-none block">15</span>
-          <span className="pl-6 text-[#da70d6]">)</span>;
-        </div>
-        <div className="flex">
-          <span className="text-[#858585] min-w-[3em] text-right pr-4 select-none block">16</span>
-          <span className="text-[#ffd700]">{'}'}</span>
-        </div>
+        </Line>
+        <Line num={2}>&nbsp;</Line>
+
+        {/* NAME */}
+        <Line num={3}>
+          <motion.div initial={{ opacity: 0, scale: 0.95, y: 5 }} animate={{ opacity: 1, scale: 1, y: 0 }} transition={{ duration: 0.4, delay: dly(0.4) }}>
+            <div className="hero-name text-[65px] md:text-[90px] leading-[0.9] text-white mb-1">
+              Bussa
+            </div>
+          </motion.div>
+        </Line>
+
+        <Line num={4}>
+          <motion.div initial={{ opacity: 0, scale: 0.95, y: 5 }} animate={{ opacity: 1, scale: 1, y: 0 }} transition={{ duration: 0.4, delay: dly(0.5) }}>
+            <div style={{ display: 'inline-block' }}>
+              <div className="hero-name text-[65px] md:text-[90px] leading-[0.9] text-[#00D4FF] mb-2">
+                Surya
+              </div>
+
+              <motion.div
+                initial={{ scaleX: 0 }}
+                animate={{ scaleX: 1 }}
+                transition={{ duration: 0.7, delay: dly(0.9), ease: 'easeOut' }}
+                style={{
+                  height: '3px',
+                  background: '#007acc',
+                  borderRadius: '2px',
+                  width: '100%',
+                  marginBottom: '20px',
+                  transformOrigin: 'left',
+                }}
+              />
+            </div>
+          </motion.div>
+        </Line>
+
+        {/* ROLES */}
+        <Line num={5}>
+          <div className="flex flex-wrap gap-3 py-1">
+            {rolesData.map((r, i) => (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, y: 5 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.3, delay: dly(0.7 + i * 0.1) }}
+                className="flex items-center gap-2 border border-[#333] bg-transparent px-3 py-1 rounded text-xs select-none"
+              >
+                <div className={`w-2 h-2 rounded-full ${r.color}`}></div>
+                <span className="text-[#d4d4d4] font-medium">{r.name}</span>
+              </motion.div>
+            ))}
+          </div>
+        </Line>
+
+        <Line num={6}>&nbsp;</Line>
+
+        {/* ABOUT */}
+        <Line num={7}>
+          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5, delay: dly(1.0) }}>
+            <span className="text-[#858585]">
+              I live at the crossroads of <span className="text-[#4fc1ff] font-medium">full-stack development</span>, <span className="text-[#4fc1ff] font-medium">AI/ML</span>, and
+            </span>
+          </motion.div>
+        </Line>
+
+        <Line num={8}>
+          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5, delay: dly(1.1) }}>
+            <span className="text-[#858585]">
+              <span className="text-[#4fc1ff] font-medium">cloud engineering</span>. I build systems that are genuinely <span className="text-[#4fc1ff] font-medium">intelligent</span>
+            </span>
+          </motion.div>
+        </Line>
+
+        <Line num={9}>
+          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5, delay: dly(1.2) }}>
+            <span className="text-[#858585]">
+              and <span className="text-[#4fc1ff] font-medium">scalable</span>.
+            </span>
+          </motion.div>
+        </Line>
+
+        <Line num={10}>&nbsp;</Line>
+
+        {/* BUTTONS */}
+        <Line num={11}>
+          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5, delay: dly(1.4) }} className="flex flex-wrap gap-3 py-2 font-sans">
+            <button onClick={() => openFile('projects.js')} className="flex items-center gap-2 border border-[#007acc] bg-[#007acc] hover:bg-[#005f9e] text-white px-5 py-1.5 rounded text-sm font-medium">
+              📁 Projects
+            </button>
+            <button onClick={() => openFile('about.ts')} className="flex items-center gap-2 border border-[#333] bg-transparent hover:bg-[#2d2d2d] text-[#d4d4d4] px-5 py-1.5 rounded text-sm font-medium">
+              👤 About Me
+            </button>
+            <button onClick={() => openFile('contact.css')} className="flex items-center gap-2 border border-[#333] bg-transparent hover:bg-[#2d2d2d] text-[#d4d4d4] px-5 py-1.5 rounded text-sm font-medium">
+              ✉ Contact
+            </button>
+          </motion.div>
+        </Line>
+
+        <Line num={12}>&nbsp;</Line>
+
+        {/* STATS */}
+        <Line num={13}>
+          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5, delay: dly(1.6) }} className="grid grid-cols-2 md:grid-cols-4 border border-[#333] rounded my-2 bg-[#1c1c1c] text-[#d4d4d4] font-sans">
+            <div className="flex flex-col items-center justify-center py-6 border-b md:border-b-0 md:border-r border-[#333]">
+              <span className="text-white font-black text-2xl">3+</span>
+              <span className="text-[#858585] text-[10px] uppercase mt-2 font-bold">Years</span>
+            </div>
+            <div className="flex flex-col items-center justify-center py-6 border-b md:border-b-0 md:border-r border-[#333]">
+              <span className="text-white font-black text-2xl">10+</span>
+              <span className="text-[#858585] text-[10px] uppercase mt-2 font-bold">Projects</span>
+            </div>
+            <div className="flex flex-col items-center justify-center py-6 md:border-r border-[#333]">
+              <span className="text-white font-black text-2xl">∞</span>
+              <span className="text-[#858585] text-[10px] uppercase mt-2 font-bold">Curiosity</span>
+            </div>
+            <div className="flex flex-col items-center justify-center py-6">
+              <span className="text-white font-black text-2xl">↑</span>
+              <span className="text-[#858585] text-[10px] uppercase mt-2 font-bold">Always Learning</span>
+            </div>
+          </motion.div>
+        </Line>
+
+        <Line num={14}>&nbsp;</Line>
+
+        {/* SOCIAL */}
+        <Line num={15}>
+          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5, delay: dly(1.8) }} className="flex flex-wrap gap-3 py-1 font-sans">
+            <a href="https://github.com/suryaaaaaaaaas-projects" target="_blank" rel="noreferrer" className="flex items-center gap-2 px-3 py-1.5 rounded border border-[#333] text-xs">
+              <SiGithub size={14}/> GitHub
+            </a>
+            <a href="https://linkedin.com/in/surya" target="_blank" rel="noreferrer" className="flex items-center gap-2 px-3 py-1.5 rounded border border-[#333] text-xs">
+              <FaLinkedin size={14}/> LinkedIn
+            </a>
+            <a href="https://leetcode.com/u/surya" target="_blank" rel="noreferrer" className="flex items-center gap-2 px-3 py-1.5 rounded border border-[#333] text-xs">
+              <SiLeetcode size={14}/> LeetCode
+            </a>
+            <a href="mailto:surya@example.com" className="flex items-center gap-2 px-3 py-1.5 rounded border border-[#333] text-xs">
+              <FiMail size={14}/> Email
+            </a>
+          </motion.div>
+        </Line>
+
+        <Line num={16}>&nbsp;</Line>
+
       </div>
-    </motion.div>
+    </>
   );
 }
