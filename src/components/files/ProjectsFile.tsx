@@ -30,7 +30,7 @@ export default function ProjectsFile({ hasBeenOpened }: { hasBeenOpened: boolean
 
   const item = {
     hidden: { opacity: hasBeenOpened ? 1 : 0, y: hasBeenOpened ? 0 : 10 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.2, ease: "easeOut" } }
+    visible: { opacity: 1, y: 0, transition: { duration: 0.2,  ease: "easeInOut" as const } }
   };
 
   return (
