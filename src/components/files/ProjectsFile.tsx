@@ -1,6 +1,5 @@
 'use client';
-import { motion } from 'framer-motion';
-import {  Variants } from 'framer-motion';
+import { motion, Variants } from 'framer-motion';
 
 const projects = [
   {
@@ -24,17 +23,15 @@ const projects = [
 ];
 
 export default function ProjectsFile({ hasBeenOpened }: { hasBeenOpened: boolean }) {
-  const container = {
+  const container: Variants = {
     hidden: { opacity: hasBeenOpened ? 1 : 0 },
     visible: { opacity: 1, transition: { staggerChildren: hasBeenOpened ? 0 : 0.1 } }
   };
 
- 
-
-const item: Variants = {
-  hidden: { opacity: hasBeenOpened ? 1 : 0, y: hasBeenOpened ? 0 : 10 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.2, ease: "easeInOut" } }
-};
+  const item: Variants = {
+    hidden: { opacity: hasBeenOpened ? 1 : 0, y: hasBeenOpened ? 0 : 10 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.2, ease: "easeInOut" } }
+  };
 
   return (
     <motion.div 
