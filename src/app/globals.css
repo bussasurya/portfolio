@@ -1,4 +1,10 @@
+@import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&display=swap');
 @import "tailwindcss";
+
+.heading-font {
+  font-family: 'Syne', sans-serif;
+  font-weight: 800;
+}
 
 @theme {
   --color-vscode-bg: #1e1e1e;

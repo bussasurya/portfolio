@@ -30,22 +30,6 @@ export default function HomeFile({ hasBeenOpened }: Props) {
 
   return (
     <>
-      {/* Roc Grotesk ExtraWide ExtraBold Font */}
-      <style>{`
-        @font-face {
-          font-family: 'RocGroteskWide';
-          src: url('/fonts/RocGrotesk-ExtraWide-ExtraBold.woff2') format('woff2'),
-               url('/fonts/RocGrotesk-ExtraWide-ExtraBold.woff') format('woff');
-          font-weight: 800;
-          font-style: normal;
-          font-display: swap;
-        }
-        .hero-name {
-          font-family: 'RocGroteskWide', sans-serif;
-          font-weight: 800;
-        }
-      `}</style>
-
       <div className="pt-6 pb-12 w-full h-full overflow-y-auto custom-scrollbar font-mono text-[14px] leading-[24px] flex flex-col text-[#d4d4d4] bg-[#1e1e1e]">
 
         {/* HEADER */}
@@ -59,7 +43,7 @@ export default function HomeFile({ hasBeenOpened }: Props) {
         {/* NAME */}
         <Line num={3}>
           <motion.div initial={{ opacity: 0, scale: 0.95, y: 5 }} animate={{ opacity: 1, scale: 1, y: 0 }} transition={{ duration: 0.4, delay: dly(0.4) }}>
-            <div className="hero-name text-[50px] md:text-[70px] leading-[0.9] text-white mb-1">
+            <div className="heading-font text-[50px] md:text-[70px] leading-[0.9] text-white mb-1">
               Bussa
             </div>
           </motion.div>
@@ -68,7 +52,7 @@ export default function HomeFile({ hasBeenOpened }: Props) {
         <Line num={4}>
           <motion.div initial={{ opacity: 0, scale: 0.95, y: 5 }} animate={{ opacity: 1, scale: 1, y: 0 }} transition={{ duration: 0.4, delay: dly(0.5) }}>
             <div style={{ display: 'inline-block' }}>
-              <div className="hero-name text-[50] md:text-[70px] leading-[0.9] text-[#00D4FF] mb-1">
+              <div className="heading-font text-[50] md:text-[70px] leading-[0.9] text-[#00D4FF] mb-1">
                 Surya
               </div>
 
@@ -78,7 +62,7 @@ export default function HomeFile({ hasBeenOpened }: Props) {
                 transition={{ duration: 0.7, delay: dly(0.9), ease: 'easeOut' }}
                 style={{
                   height: '3px',
-                  background: '#007acc',
+                  background: '#074772ff',
                   borderRadius: '2px',
                   width: '100%',
                   marginBottom: '20px',
@@ -138,7 +122,7 @@ export default function HomeFile({ hasBeenOpened }: Props) {
 
         {/* BUTTONS */}
         <Line num={11}>
-          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5, delay: dly(1.4) }} className="flex flex-wrap gap-3 py-2 font-sans">
+          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5, delay: dly(1.4) }} className="flex flex-wrap gap-3 py-2 font-mono">
             <button onClick={() => openFile('projects.js')} className="flex items-center gap-2 border border-[#007acc] bg-[#007acc] hover:bg-[#005f9e] text-white px-5 py-1.5 rounded text-sm font-medium">
               📁 Projects
             </button>
@@ -155,7 +139,7 @@ export default function HomeFile({ hasBeenOpened }: Props) {
 
         {/* STATS */}
         <Line num={13}>
-          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5, delay: dly(1.6) }} className="grid grid-cols-2 md:grid-cols-4 border border-[#333] rounded my-2 bg-[#1c1c1c] text-[#d4d4d4] font-sans">
+          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5, delay: dly(1.6) }} className="grid grid-cols-2 md:grid-cols-4 border border-[#333] rounded my-2 bg-[#1c1c1c] text-[#d4d4d4] font-mono">
             <div className="flex flex-col items-center justify-center py-6 border-b md:border-b-0 md:border-r border-[#333]">
               <span className="text-white font-black text-2xl">3+</span>
               <span className="text-[#858585] text-[10px] uppercase mt-2 font-bold">Years</span>
@@ -179,18 +163,18 @@ export default function HomeFile({ hasBeenOpened }: Props) {
 
         {/* SOCIAL */}
         <Line num={15}>
-          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5, delay: dly(1.8) }} className="flex flex-wrap gap-3 py-1 font-sans">
+          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5, delay: dly(1.8) }} className="flex flex-wrap gap-3 py-1 font-mono">
             <a href="https://github.com/suryaaaaaaaaas-projects" target="_blank" rel="noreferrer" className="flex items-center gap-2 px-3 py-1.5 rounded border border-[#333] text-xs">
-              <SiGithub size={14}/> GitHub
+              <SiGithub size={14} /> GitHub
             </a>
             <a href="https://linkedin.com/in/surya" target="_blank" rel="noreferrer" className="flex items-center gap-2 px-3 py-1.5 rounded border border-[#333] text-xs">
-              <FaLinkedin size={14}/> LinkedIn
+              <FaLinkedin size={14} /> LinkedIn
             </a>
             <a href="https://leetcode.com/u/surya" target="_blank" rel="noreferrer" className="flex items-center gap-2 px-3 py-1.5 rounded border border-[#333] text-xs">
-              <SiLeetcode size={14}/> LeetCode
+              <SiLeetcode size={14} /> LeetCode
             </a>
             <a href="mailto:surya@example.com" className="flex items-center gap-2 px-3 py-1.5 rounded border border-[#333] text-xs">
-              <FiMail size={14}/> Email
+              <FiMail size={14} /> Email
             </a>
           </motion.div>
         </Line>
