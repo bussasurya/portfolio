@@ -4,6 +4,7 @@ import { SiGithub, SiLeetcode } from 'react-icons/si';
 import { FaLinkedin } from 'react-icons/fa';
 import { FiMail } from 'react-icons/fi';
 import { useStore } from '../../store/useStore';
+import { useState, useEffect } from 'react';
 
 const rolesData = [
   { name: 'Full Stack Dev', color: 'bg-[#16A34A]' },
@@ -22,6 +23,59 @@ const Line = ({ num, children, className = "" }: { num: number, children: React.
     <div className="flex-1 shrink-0">{children}</div>
   </div>
 );
+
+const TypewriterText = () => {
+  const [text, setText] = useState('');
+  const [isDeleting, setIsDeleting] = useState(false);
+  const [loopNum, setLoopNum] = useState(0);
+  
+  const typingSpeed = 60;
+  const deletingSpeed = 30;
+  const pauseTime = 2000;
+
+  const messages = [
+    "Building scalable cloud systems ☁️",
+    "Designing efficient DevOps pipelines ⚙️",
+    "Engineering full-stack applications 🌐",
+    "Deploying intelligent ML solutions 🤖"
+  ];
+
+  useEffect(() => {
+    let timer: NodeJS.Timeout;
+    const currentMessage = messages[loopNum % messages.length];
+
+    if (isDeleting) {
+      timer = setTimeout(() => {
+        setText(currentMessage.substring(0, text.length - 1));
+      }, deletingSpeed);
+
+      if (text === '') {
+        setIsDeleting(false);
+        setLoopNum(loopNum + 1);
+      }
+    } else {
+      timer = setTimeout(() => {
+        setText(currentMessage.substring(0, text.length + 1));
+      }, typingSpeed);
+
+      if (text === currentMessage) {
+        timer = setTimeout(() => {
+          setIsDeleting(true);
+        }, pauseTime);
+      }
+    }
+
+    return () => clearTimeout(timer);
+  }, [text, isDeleting, loopNum]);
+
+  return (
+    <span className="text-[#ce9178] font-mono text-[15px]">
+      <span className="text-[#569cd6] font-bold">{'> '}</span>
+      {text}
+      <span className="animate-pulse text-[#d4d4d4]">_</span>
+    </span>
+  );
+};
 
 export default function HomeFile({ hasBeenOpened }: Props) {
   const { openFile } = useStore();
@@ -52,7 +106,7 @@ export default function HomeFile({ hasBeenOpened }: Props) {
         <Line num={4}>
           <motion.div initial={{ opacity: 0, scale: 0.95, y: 5 }} animate={{ opacity: 1, scale: 1, y: 0 }} transition={{ duration: 0.4, delay: dly(0.5) }}>
             <div style={{ display: 'inline-block' }}>
-              <div className="heading-font text-[50] md:text-[70px] leading-[0.9] text-[#00D4FF] mb-1">
+              <div className="heading-font text-[50px] md:text-[70px] leading-[0.9] text-[#00D4FF] mb-1">
                 Surya
               </div>
 
@@ -61,8 +115,8 @@ export default function HomeFile({ hasBeenOpened }: Props) {
                 animate={{ scaleX: 1 }}
                 transition={{ duration: 0.7, delay: dly(0.9), ease: 'easeOut' }}
                 style={{
-                  height: '3px',
-                  background: '#074772ff',
+                  height: '2px',
+                  background: 'linear-gradient(to right, #0EA5E9, rgba(14,165,233,0))',
                   borderRadius: '2px',
                   width: '100%',
                   marginBottom: '20px',
@@ -82,7 +136,7 @@ export default function HomeFile({ hasBeenOpened }: Props) {
                 initial={{ opacity: 0, y: 5 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.3, delay: dly(0.7 + i * 0.1) }}
-                className="flex items-center gap-2 border border-[#333] bg-transparent px-3 py-1 rounded text-xs select-none"
+                className="flex items-center gap-2 border border-[#333] bg-[#252526] hover:border-[#4fc1ff]/50 hover:bg-[#2a2d2e] transition-colors px-3 py-1.5 rounded text-xs select-none cursor-default"
               >
                 <div className={`w-2 h-2 rounded-full ${r.color}`}></div>
                 <span className="text-[#d4d4d4] font-medium">{r.name}</span>
@@ -91,21 +145,25 @@ export default function HomeFile({ hasBeenOpened }: Props) {
           </div>
         </Line>
 
-        <Line num={6}>&nbsp;</Line>
-
-        {/* ABOUT */}
-        <Line num={7}>
-          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5, delay: dly(1.0) }}>
-            <span className="text-[#858585]">
-              I live at the crossroads of <span className="text-[#4fc1ff] font-medium">full-stack development</span>, <span className="text-[#4fc1ff] font-medium">AI/ML</span>, and
-            </span>
+        {/* TYPEWRITER */}
+        <Line num={6}>
+          <motion.div 
+            initial={{ opacity: 0 }} 
+            animate={{ opacity: 1 }} 
+            transition={{ duration: 0.5, delay: dly(1.0) }} 
+            className="py-2"
+          >
+            <TypewriterText />
           </motion.div>
         </Line>
 
+        <Line num={7}>&nbsp;</Line>
+
+        {/* ABOUT */}
         <Line num={8}>
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5, delay: dly(1.1) }}>
             <span className="text-[#858585]">
-              <span className="text-[#4fc1ff] font-medium">cloud engineering</span>. I build systems that are genuinely <span className="text-[#4fc1ff] font-medium">intelligent</span>
+              I live at the crossroads of <span className="text-[#4fc1ff] font-medium">full-stack development</span>, <span className="text-[#4fc1ff] font-medium">AI/ML</span>, and
             </span>
           </motion.div>
         </Line>
@@ -113,42 +171,50 @@ export default function HomeFile({ hasBeenOpened }: Props) {
         <Line num={9}>
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5, delay: dly(1.2) }}>
             <span className="text-[#858585]">
+              <span className="text-[#4fc1ff] font-medium">cloud engineering</span>. I build systems that are genuinely <span className="text-[#4fc1ff] font-medium">intelligent</span>
+            </span>
+          </motion.div>
+        </Line>
+
+        <Line num={10}>
+          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5, delay: dly(1.3) }}>
+            <span className="text-[#858585]">
               and <span className="text-[#4fc1ff] font-medium">scalable</span>.
             </span>
           </motion.div>
         </Line>
 
-        <Line num={10}>&nbsp;</Line>
+        <Line num={11}>&nbsp;</Line>
 
         {/* BUTTONS */}
-        <Line num={11}>
+        <Line num={12}>
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5, delay: dly(1.4) }} className="flex flex-wrap gap-3 py-2 font-mono">
-            <button onClick={() => openFile('projects.js')} className="flex items-center gap-2 border border-[#007acc] bg-[#007acc] hover:bg-[#005f9e] text-white px-5 py-1.5 rounded text-sm font-medium">
+            <button onClick={() => openFile('projects.js')} className="flex items-center gap-2 border border-[#007acc] bg-[#007acc] hover:bg-[#005f9e] text-white px-5 py-1.5 rounded text-sm font-medium transition-colors">
               📁 Projects
             </button>
-            <button onClick={() => openFile('about.ts')} className="flex items-center gap-2 border border-[#333] bg-transparent hover:bg-[#2d2d2d] text-[#d4d4d4] px-5 py-1.5 rounded text-sm font-medium">
+            <button onClick={() => openFile('about.ts')} className="flex items-center gap-2 border border-[#333] bg-[#252526] hover:bg-[#2d2d2d] text-[#d4d4d4] px-5 py-1.5 rounded text-sm font-medium transition-colors">
               👤 About Me
             </button>
-            <button onClick={() => openFile('contact.css')} className="flex items-center gap-2 border border-[#333] bg-transparent hover:bg-[#2d2d2d] text-[#d4d4d4] px-5 py-1.5 rounded text-sm font-medium">
+            <button onClick={() => openFile('contact.css')} className="flex items-center gap-2 border border-[#333] bg-[#252526] hover:bg-[#2d2d2d] text-[#d4d4d4] px-5 py-1.5 rounded text-sm font-medium transition-colors">
               ✉ Contact
             </button>
           </motion.div>
         </Line>
 
-        <Line num={12}>&nbsp;</Line>
+        <Line num={13}>&nbsp;</Line>
 
         {/* STATS */}
-        <Line num={13}>
-          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5, delay: dly(1.6) }} className="grid grid-cols-2 md:grid-cols-4 border border-[#333] rounded my-2 bg-[#1c1c1c] text-[#d4d4d4] font-mono">
-            <div className="flex flex-col items-center justify-center py-6 border-b md:border-b-0 md:border-r border-[#333]">
+        <Line num={14}>
+          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5, delay: dly(1.6) }} className="grid grid-cols-2 md:grid-cols-4 border border-[#3c3c3c] rounded my-2 bg-[#1c1c1c] text-[#d4d4d4] font-mono shadow-md hover:border-[#4fc1ff]/30 transition-colors">
+            <div className="flex flex-col items-center justify-center py-6 border-b md:border-b-0 md:border-r border-[#3c3c3c]">
               <span className="text-white font-black text-2xl">3+</span>
               <span className="text-[#858585] text-[10px] uppercase mt-2 font-bold">Years</span>
             </div>
-            <div className="flex flex-col items-center justify-center py-6 border-b md:border-b-0 md:border-r border-[#333]">
+            <div className="flex flex-col items-center justify-center py-6 border-b md:border-b-0 md:border-r border-[#3c3c3c]">
               <span className="text-white font-black text-2xl">10+</span>
               <span className="text-[#858585] text-[10px] uppercase mt-2 font-bold">Projects</span>
             </div>
-            <div className="flex flex-col items-center justify-center py-6 md:border-r border-[#333]">
+            <div className="flex flex-col items-center justify-center py-6 border-r-0 md:border-r border-[#3c3c3c]">
               <span className="text-white font-black text-2xl">∞</span>
               <span className="text-[#858585] text-[10px] uppercase mt-2 font-bold">Curiosity</span>
             </div>
@@ -159,27 +225,27 @@ export default function HomeFile({ hasBeenOpened }: Props) {
           </motion.div>
         </Line>
 
-        <Line num={14}>&nbsp;</Line>
+        <Line num={15}>&nbsp;</Line>
 
         {/* SOCIAL */}
-        <Line num={15}>
+        <Line num={16}>
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5, delay: dly(1.8) }} className="flex flex-wrap gap-3 py-1 font-mono">
-            <a href="https://github.com/bussasurya" target="_blank" rel="noreferrer" className="flex items-center gap-2 px-3 py-1.5 rounded border border-[#333] text-xs">
+            <a href="https://github.com/bussasurya" target="_blank" rel="noreferrer" className="flex items-center gap-2 px-3 py-1.5 rounded border border-[#333] bg-[#252526] hover:border-[#4fc1ff]/50 hover:bg-[#2a2d2e] transition-colors text-xs text-[#cccccc]">
               <SiGithub size={14} /> GitHub
             </a>
-            <a href="https://www.linkedin.com/in/bussasurya/" target="_blank" rel="noreferrer" className="flex items-center gap-2 px-3 py-1.5 rounded border border-[#333] text-xs">
+            <a href="https://www.linkedin.com/in/bussasurya/" target="_blank" rel="noreferrer" className="flex items-center gap-2 px-3 py-1.5 rounded border border-[#333] bg-[#252526] hover:border-[#4fc1ff]/50 hover:bg-[#2a2d2e] transition-colors text-xs text-[#cccccc]">
               <FaLinkedin size={14} /> LinkedIn
             </a>
-            <a href="https://leetcode.com/u/bussasurya/" target="_blank" rel="noreferrer" className="flex items-center gap-2 px-3 py-1.5 rounded border border-[#333] text-xs">
+            <a href="https://leetcode.com/u/bussasurya/" target="_blank" rel="noreferrer" className="flex items-center gap-2 px-3 py-1.5 rounded border border-[#333] bg-[#252526] hover:border-[#4fc1ff]/50 hover:bg-[#2a2d2e] transition-colors text-xs text-[#cccccc]">
               <SiLeetcode size={14} /> LeetCode
             </a>
-            <a href="mailto:suryabussa12@gmail.com" className="flex items-center gap-2 px-3 py-1.5 rounded border border-[#333] text-xs">
+            <a href="mailto:suryabussa12@gmail.com" className="flex items-center gap-2 px-3 py-1.5 rounded border border-[#333] bg-[#252526] hover:border-[#4fc1ff]/50 hover:bg-[#2a2d2e] transition-colors text-xs text-[#cccccc]">
               <FiMail size={14} /> Email
             </a>
           </motion.div>
         </Line>
 
-        <Line num={16}>&nbsp;</Line>
+        <Line num={17}>&nbsp;</Line>
 
       </div>
     </>
