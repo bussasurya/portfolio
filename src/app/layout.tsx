@@ -1,9 +1,14 @@
 import type { Metadata } from 'next';
-import { Fira_Code } from 'next/font/google';
+import { Fira_Code, JetBrains_Mono } from 'next/font/google';
 import './globals.css';
 
 const firaCode = Fira_Code({
   variable: '--font-mono',
+  subsets: ['latin'],
+});
+
+const jetBrainsMono = JetBrains_Mono({
+  variable: '--font-jetbrains',
   subsets: ['latin'],
 });
 
@@ -19,7 +24,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${firaCode.variable} antialiased font-mono overflow-hidden`}>
+      <body className={`${firaCode.variable} ${jetBrainsMono.variable} antialiased font-mono overflow-hidden`}>
         {children}
       </body>
     </html>

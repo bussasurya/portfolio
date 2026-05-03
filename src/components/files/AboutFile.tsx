@@ -1,6 +1,6 @@
 'use client';
 import { motion } from 'framer-motion';
-import { FaServer, FaBrain, FaCloud, FaDatabase, FaCode, FaTools, FaGraduationCap } from 'react-icons/fa';
+import { FaServer, FaBrain, FaCloud, FaDatabase, FaCode, FaTools, FaGraduationCap, FaPuzzlePiece } from 'react-icons/fa';
 
 export default function AboutFile({ hasBeenOpened }: { hasBeenOpened: boolean }) {
   const dly = (n: number) => hasBeenOpened ? 0 : n;
@@ -32,23 +32,34 @@ export default function AboutFile({ hasBeenOpened }: { hasBeenOpened: boolean })
 
       {/* 4. Current Focus Section */}
       <motion.div initial={{ opacity: 0, y: 15 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: dly(0.3) }} className="focus-section flex flex-col gap-4">
-        <h2 className="heading-font text-2xl font-bold text-white border-b border-[#333] pb-2 uppercase tracking-wider">CURRENT FOCUS</h2>
+        <h2 className="subheading-font text-2xl font-bold text-white border-b border-[#333] pb-2 uppercase tracking-wider">CURRENT FOCUS</h2>
 
         <div className="focus-grid grid grid-cols-1 sm:grid-cols-2 gap-4">
           {/* Focus Items (2x3 Grid implies 6 items) */}
-          <div className="focus-item flex items-center gap-4 bg-[#1e1e1e] border border-[#3c3c3c] rounded-md p-4 hover:border-[#4fc1ff] transition-colors cursor-default">
-            <span className="icon text-xl text-[#4fc1ff]"><FaServer /></span>
-            <p className="font-medium text-[#d4d4d4]">Backend Engineering</p>
+          <div className="focus-item flex items-center gap-4 bg-[#1e1e1e] border border-[#3c3c3c] rounded-md p-4 hover:border-[#00D4FF] transition-colors cursor-default">
+            <span className="icon text-xl text-[#00D4FF]"><FaCloud /></span>
+            <p className="font-medium text-[#d4d4d4]">Cloud Architecture</p>
+          </div>
+
+          <div className="focus-item flex items-center gap-4 bg-[#1e1e1e] border border-[#3c3c3c] rounded-md p-4 hover:border-[#D97706] transition-colors cursor-default">
+            <span className="icon text-xl text-[#D97706]"><FaTools /></span>
+            <p className="font-medium text-[#d4d4d4]">DevOps & CI/CD</p>
           </div>
 
           <div className="focus-item flex items-center gap-4 bg-[#1e1e1e] border border-[#3c3c3c] rounded-md p-4 hover:border-[#c586c0] transition-colors cursor-default">
             <span className="icon text-xl text-[#c586c0]"><FaBrain /></span>
             <p className="font-medium text-[#d4d4d4]">Machine Learning</p>
           </div>
+          <div className="focus-item flex items-center gap-4 bg-[#1e1e1e] border border-[#3c3c3c] rounded-md p-4 hover:border-[#16A34A] transition-colors cursor-default">
+            <span className="icon text-xl text-[#16A34A]"><FaCode /></span>
+            <p className="font-medium text-[#d4d4d4]">Full-Stack Systems</p>
+          </div>
 
-          <div className="focus-item flex items-center gap-4 bg-[#1e1e1e] border border-[#3c3c3c] rounded-md p-4 hover:border-[#00D4FF] transition-colors cursor-default">
-            <span className="icon text-xl text-[#00D4FF]"><FaCloud /></span>
-            <p className="font-medium text-[#d4d4d4]">Cloud Architecture</p>
+          <div className="focus-item flex items-center gap-4 bg-[#1e1e1e] border border-[#3c3c3c] rounded-md p-4 hover:border-[#4fc1ff] transition-colors cursor-default">
+            <span className="icon text-xl text-[#4fc1ff]">
+              <FaPuzzlePiece />
+            </span>
+            <p className="font-medium text-[#d4d4d4]">Problem Solving </p>
           </div>
 
           <div className="focus-item flex items-center gap-4 bg-[#1e1e1e] border border-[#3c3c3c] rounded-md p-4 hover:border-[#dcdcaa] transition-colors cursor-default">
@@ -56,21 +67,15 @@ export default function AboutFile({ hasBeenOpened }: { hasBeenOpened: boolean })
             <p className="font-medium text-[#d4d4d4]">Database Design</p>
           </div>
 
-          <div className="focus-item flex items-center gap-4 bg-[#1e1e1e] border border-[#3c3c3c] rounded-md p-4 hover:border-[#16A34A] transition-colors cursor-default">
-            <span className="icon text-xl text-[#16A34A]"><FaCode /></span>
-            <p className="font-medium text-[#d4d4d4]">Full-Stack Systems</p>
-          </div>
 
-          <div className="focus-item flex items-center gap-4 bg-[#1e1e1e] border border-[#3c3c3c] rounded-md p-4 hover:border-[#D97706] transition-colors cursor-default">
-            <span className="icon text-xl text-[#D97706]"><FaTools /></span>
-            <p className="font-medium text-[#d4d4d4]">DevOps & CI/CD</p>
-          </div>
+
+
         </div>
       </motion.div>
 
       {/* 5. Education Section */}
       <motion.div initial={{ opacity: 0, y: 15 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: dly(0.4) }} className="education-section flex flex-col gap-4">
-        <h2 className="heading-font text-2xl font-bold text-white border-b border-[#333] pb-2 uppercase tracking-wider">EDUCATION</h2>
+        <h2 className="subheading-font text-2xl font-bold text-white border-b border-[#333] pb-2 uppercase tracking-wider">EDUCATION</h2>
 
         <div className="flex flex-col gap-4">
           {/* Ed Card 1 */}
@@ -81,21 +86,20 @@ export default function AboutFile({ hasBeenOpened }: { hasBeenOpened: boolean })
                   <FaGraduationCap size={20} />
                 </span>
                 <div className="title-group">
-                  <h3 className="heading-font text-xl font-bold text-[#e0e0e0]">University Institute of Technology</h3>
+                  <h3 className="subheading-font text-xl font-bold text-[#e0e0e0]">Amrita Vishwa VidyaPeetham</h3>
                   <p className="subtitle text-[#858585] text-sm mt-1">Undergraduate Studies</p>
                 </div>
               </div>
               <div className="right mt-4 sm:mt-0">
                 <span className="year text-[#6A9955] font-bold border border-[#6A9955]/30 bg-[#6A9955]/10 px-3 py-1 rounded text-sm">
-                  2021 — 2025
+                  2023-2027
                 </span>
               </div>
             </div>
 
             <div className="education-body flex flex-col gap-1">
               <p className="degree text-[#4fc1ff] font-semibold text-[14px]">B.Tech in Computer Science & Engineering</p>
-              <p className="minor text-[#d4d4d4]">Minor in Data Science</p>
-              <p className="gpa text-[#858585] mt-1">GPA: <span className="text-[#dcdcaa]">3.8/4.0</span></p>
+              <p className="gpa text-[#858585] mt-1">GPA: <span className="text-[#dcdcaa]">7.2/10</span></p>
             </div>
           </div>
 
@@ -107,13 +111,13 @@ export default function AboutFile({ hasBeenOpened }: { hasBeenOpened: boolean })
                   <FaGraduationCap size={20} />
                 </span>
                 <div className="title-group">
-                  <h3 className="heading-font text-xl font-bold text-[#e0e0e0]">High School Academy</h3>
+                  <h3 className="subheading-font text-xl font-bold text-[#e0e0e0]">Resonance Eduventures Limited </h3>
                   <p className="subtitle text-[#858585] text-sm mt-1">Secondary Education</p>
                 </div>
               </div>
               <div className="right mt-4 sm:mt-0">
                 <span className="year text-[#6A9955] font-bold border border-[#6A9955]/30 bg-[#6A9955]/10 px-3 py-1 rounded text-sm">
-                  2019 — 2021
+                  2021 — 2023
                 </span>
               </div>
             </div>
@@ -121,7 +125,7 @@ export default function AboutFile({ hasBeenOpened }: { hasBeenOpened: boolean })
             <div className="education-body flex flex-col gap-1">
               <p className="degree text-[#4fc1ff] font-semibold text-[14px]">High School Diploma (MPC)</p>
               <p className="minor text-[#d4d4d4]">Math, Physics, Chemistry</p>
-              <p className="gpa text-[#858585] mt-1">Percentage: <span className="text-[#dcdcaa]">95%</span></p>
+              <p className="gpa text-[#858585] mt-1">Percentage: <span className="text-[#dcdcaa]">94.6%</span></p>
             </div>
           </div>
         </div>

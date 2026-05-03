@@ -1,68 +1,166 @@
 'use client';
-import { motion } from 'framer-motion';
+import { motion, Variants } from 'framer-motion';
+import { FaEnvelope, FaLinkedin, FaGithub, FaMedium, FaChartBar, FaCode, FaYoutube, FaInstagram } from 'react-icons/fa';
+import React from 'react';
+
+// Data for left section
+const socialLinks = [
+  { platform: "Email", url: "suryabussa12@gmail.com", href: "mailto:suryabussa12@gmail.com", icon: FaEnvelope, color: "#4fc1ff" },
+  { platform: "LinkedIn", url: "linkedin.com/in/surya", href: "https://linkedin.com/in/surya", icon: FaLinkedin, color: "#0077b5" },
+  { platform: "GitHub", url: "github.com/surya", href: "https://github.com/surya", icon: FaGithub, color: "#d4d4d4" },
+  { platform: "LeetCode", url: "leetcode.com/surya", href: "https://leetcode.com/surya", icon: FaCode, color: "#ffa116" },
+  { platform: "Instagram", url: "instagram.com/surya", href: "https://instagram.com/surya", icon: FaInstagram, color: "#e1306c" }
+];
 
 export default function ContactFile({ hasBeenOpened }: { hasBeenOpened: boolean }) {
-  const container = {
+  const container: Variants = {
     hidden: { opacity: hasBeenOpened ? 1 : 0 },
-    visible: { opacity: 1, transition: { staggerChildren: hasBeenOpened ? 0 : 0.08 } }
-  };
-  const lineVariant = {
-    hidden: { opacity: hasBeenOpened ? 1 : 0 },
-    visible: { opacity: 1, transition: { duration: 0.2 } }
+    visible: { opacity: 1, transition: { staggerChildren: hasBeenOpened ? 0 : 0.1 } }
   };
 
-  const lines = [
-    `/*`,
-    ` * GET IN TOUCH`,
-    ` * Feel free to reach out for collaborations or just a friendly hello.`,
-    ` */`,
-    ``,
-    `:root {`,
-    `  --email: "mailto:surya@example.com";`,
-    `  --github: "https://github.com/surya";`,
-    `  --linkedin: "https://linkedin.com/in/surya";`,
-    `  --twitter: "https://twitter.com/surya";`,
-    `}`,
-    ``,
-    `.contact-me {`,
-    `  display: flex;`,
-    `  justify-content: center;`,
-    `  align-items: center;`,
-    `  background-color: var(--black);`,
-    `  cursor: pointer;`,
-    `}`,
-    ``,
-    `.contact-me:hover {`,
-    `  transform: scale(1.05); /* Reach out! */`,
-    `}`
-  ];
+  const itemVariant: Variants = {
+    hidden: { opacity: hasBeenOpened ? 1 : 0, y: hasBeenOpened ? 0 : 15 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.4, ease: "easeOut" } }
+  };
+
+  const dly = (n: number) => hasBeenOpened ? 0 : n;
 
   return (
-    <motion.div initial={hasBeenOpened ? "visible" : "hidden"} animate="visible" variants={container} className="pt-2 px-6 font-mono text-[13px] text-[#cccccc] leading-[18px] w-full h-full">
-      {lines.map((line, i) => {
-        let content: React.ReactNode = <span className="text-[#cccccc]">{line}</span>;
-        
-        if (line.startsWith('/*') || line.startsWith(' *')) content = <span className="text-[#6A9955]">{line}</span>;
-        else if (line.includes(':root') || line.includes('.contact-me')) content = <span><span className="text-[#d7ba7d]">{line.replace('{', '')}</span> <span className="text-[#ffd700]">{line.includes('{') ? '{' : ''}</span></span>;
-        else if (line === '}' || line.startsWith('}')) content = <span className="text-[#ffd700]">{'}'}</span>;
-        else if (line.includes('--email:')) content = <span className="pl-4"><span className="text-[#9cdcfe]">--email:</span> <a href="mailto:surya@example.com" className="text-[#ce9178] hover:text-[#4fc1ff] hover:underline transition-colors">"mailto:surya@example.com"</a>;</span>;
-        else if (line.includes('--github:')) content = <span className="pl-4"><span className="text-[#9cdcfe]">--github:</span> <a href="https://github.com/surya" target="_blank" rel="noreferrer" className="text-[#ce9178] hover:text-[#4fc1ff] hover:underline transition-colors">"https://github.com/surya"</a>;</span>;
-        else if (line.includes('--linkedin:')) content = <span className="pl-4"><span className="text-[#9cdcfe]">--linkedin:</span> <a href="https://linkedin.com/in/surya" target="_blank" rel="noreferrer" className="text-[#ce9178] hover:text-[#4fc1ff] hover:underline transition-colors">"https://linkedin.com/in/surya"</a>;</span>;
-        else if (line.includes('--twitter:')) content = <span className="pl-4"><span className="text-[#9cdcfe]">--twitter:</span> <a href="https://twitter.com/surya" target="_blank" rel="noreferrer" className="text-[#ce9178] hover:text-[#4fc1ff] hover:underline transition-colors">"https://twitter.com/surya"</a>;</span>;
-        else if (line.includes('display: flex;') || line.includes('justify-content:') || line.includes('align-items:') || line.includes('cursor:') || line.includes('background-color:')) {
-          const parts = line.split(':');
-          content = <span className="pl-4"><span className="text-[#9cdcfe]">{parts[0].trim()}:</span> <span className="text-[#ce9178]">{parts[1].trim()}</span></span>;
-        } else if (line.includes('transform: scale')) {
-          content = <span className="pl-4"><span className="text-[#9cdcfe]">transform:</span> <span className="text-[#ce9178]">scale(1.05);</span> <span className="text-[#6A9955]">/* Reach out! */</span></span>;
-        }
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.3 }}
+      className="contact-page font-mono flex flex-col gap-8 w-full h-full overflow-y-auto p-6 max-w-5xl mx-auto custom-scrollbar bg-[#1e1e1e]"
+    >
+      {/* Header Section */}
+      <motion.div
+        initial={{ opacity: 0, y: 15 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5, delay: dly(0.1) }}
+        className="contact-header flex flex-col gap-2"
+      >
+        <div className="code-line text-[#6A9955] text-sm">{"/* contact.css — let's build something */"}</div>
+        <h1 className="heading-font text-4xl md:text-5xl font-bold text-white tracking-tight">Contact</h1>
+        <p className="subtitle text-[#858585] mt-1">{'// open to work, collabs & good conversations'}</p>
+      </motion.div>
 
-        return (
-          <motion.div key={i} variants={lineVariant} className="flex hover:bg-white/5 transition-colors -mx-6 px-6 py-[1px]">
-            <span className="text-[#858585] min-w-[3em] text-right pr-4 select-none block">{i + 1}</span>
-            <span className="whitespace-pre-wrap">{content}</span>
-          </motion.div>
-        );
-      })}
+      {/* Main Grid */}
+      <motion.div
+        initial={hasBeenOpened ? "visible" : "hidden"}
+        animate="visible"
+        variants={container}
+        className="contact-grid grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 pb-8"
+      >
+        {/* Left Section: Social Links */}
+        <motion.div variants={itemVariant} className="left-section flex flex-col gap-4">
+          <h2 className="subheading-font text-[#4fc1ff] text-xl font-bold mb-2 uppercase tracking-widest border-b border-[#333] pb-2">
+            FIND ME ON
+          </h2>
+
+          <div className="flex flex-col gap-3">
+            {socialLinks.map((social, idx) => {
+              const Icon = social.icon;
+              return (
+                <a
+                  key={idx}
+                  href={social.href}
+                  target="_blank"
+                  rel="noreferrer"
+                  style={{
+                    '--hover-color': social.color
+                  } as React.CSSProperties}
+                  className="flex items-center p-3 bg-[#252526] border border-[#333] rounded-lg transition-all group hover:shadow-lg"
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.borderColor = social.color;
+                    e.currentTarget.style.backgroundColor = `${social.color}15`;
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.borderColor = "#333";
+                    e.currentTarget.style.backgroundColor = "#252526";
+                  }}
+                >
+                  <div className="icon flex items-center justify-center p-2 rounded-md bg-[#1e1e1e] border border-[#3c3c3c] mr-4 group-hover:scale-110 transition-transform">
+                    <Icon size={20} color={social.color} />
+                  </div>
+                  <div className="flex flex-col">
+                    <span
+                      className="font-bold text-[#e0e0e0] transition-colors"
+                      style={{}}
+                      onMouseEnter={(e) => (e.currentTarget.style.color = social.color)}
+                      onMouseLeave={(e) => (e.currentTarget.style.color = "#e0e0e0")}
+                    >
+                      {social.platform}
+                    </span>
+                    <span className="text-xs text-[#858585]">{social.url}</span>
+                  </div>
+                </a>
+              );
+            })}
+          </div>
+        </motion.div>
+
+        {/* Right Section: Form */}
+        <motion.div variants={itemVariant} className="right-section flex flex-col gap-4">
+          <h2 className="subheading-font text-[#4fc1ff] text-xl font-bold mb-2 uppercase tracking-widest border-b border-[#333] pb-2">
+            SEND A MESSAGE
+          </h2>
+
+          <form className="flex flex-col gap-5 bg-[#252526] p-6 rounded-lg border border-[#333]" onSubmit={(e) => e.preventDefault()}>
+
+            <div className="flex flex-col gap-1">
+              <label className="text-[#6A9955] text-xs mb-1">{'// YOUR_NAME *'}</label>
+              <input
+                type="text"
+                placeholder='"string"'
+                required
+                className="bg-[#1e1e1e] border border-[#3c3c3c] rounded p-2.5 text-[#cccccc] font-mono text-sm focus:outline-none focus:border-[#4fc1ff] focus:shadow-[0_0_8px_rgba(79,193,255,0.15)] transition-all placeholder:text-[#555]"
+              />
+            </div>
+
+            <div className="flex flex-col gap-1">
+              <label className="text-[#6A9955] text-xs mb-1">{'// YOUR_EMAIL *'}</label>
+              <input
+                type="email"
+                placeholder='"string"'
+                required
+                className="bg-[#1e1e1e] border border-[#3c3c3c] rounded p-2.5 text-[#cccccc] font-mono text-sm focus:outline-none focus:border-[#4fc1ff] focus:shadow-[0_0_8px_rgba(79,193,255,0.15)] transition-all placeholder:text-[#555]"
+              />
+            </div>
+
+            <div className="flex flex-col gap-1">
+              <label className="text-[#6A9955] text-xs mb-1">{'// SUBJECT'}</label>
+              <input
+                type="text"
+                placeholder='"string"'
+                className="bg-[#1e1e1e] border border-[#3c3c3c] rounded p-2.5 text-[#cccccc] font-mono text-sm focus:outline-none focus:border-[#4fc1ff] focus:shadow-[0_0_8px_rgba(79,193,255,0.15)] transition-all placeholder:text-[#555]"
+              />
+            </div>
+
+            <div className="flex flex-col gap-1">
+              <label className="text-[#6A9955] text-xs mb-1">{'// MESSAGE *'}</label>
+              <textarea
+                placeholder='"your message"'
+                required
+                rows={4}
+                className="bg-[#1e1e1e] border border-[#3c3c3c] rounded p-2.5 text-[#cccccc] font-mono text-sm focus:outline-none focus:border-[#4fc1ff] focus:shadow-[0_0_8px_rgba(79,193,255,0.15)] transition-all resize-y placeholder:text-[#555] custom-scrollbar"
+              />
+            </div>
+
+            <button
+              type="submit"
+              className="mt-2 w-full py-3 bg-[#0e639c] hover:bg-[#1177bb] text-white font-mono font-bold rounded flex justify-center items-center gap-2 transition-colors focus:outline-none focus:ring-2 focus:ring-[#4fc1ff] focus:ring-offset-2 focus:ring-offset-[#252526]"
+            >
+              <span className="text-[#4fc1ff]">→</span> send_message()
+            </button>
+
+            <p className="text-center text-[10px] text-[#858585] mt-2">
+              {'// Powered by Formspree (lands directly in my inbox) :p'}
+            </p>
+          </form>
+
+        </motion.div>
+      </motion.div>
+
     </motion.div>
   );
 }

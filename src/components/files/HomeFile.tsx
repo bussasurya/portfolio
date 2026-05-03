@@ -164,16 +164,16 @@ export default function HomeFile({ hasBeenOpened }: Props) {
         {/* SOCIAL */}
         <Line num={15}>
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5, delay: dly(1.8) }} className="flex flex-wrap gap-3 py-1 font-mono">
-            <a href="https://github.com/suryaaaaaaaaas-projects" target="_blank" rel="noreferrer" className="flex items-center gap-2 px-3 py-1.5 rounded border border-[#333] text-xs">
+            <a href="https://github.com/bussasurya" target="_blank" rel="noreferrer" className="flex items-center gap-2 px-3 py-1.5 rounded border border-[#333] text-xs">
               <SiGithub size={14} /> GitHub
             </a>
-            <a href="https://linkedin.com/in/surya" target="_blank" rel="noreferrer" className="flex items-center gap-2 px-3 py-1.5 rounded border border-[#333] text-xs">
+            <a href="https://www.linkedin.com/in/bussasurya/" target="_blank" rel="noreferrer" className="flex items-center gap-2 px-3 py-1.5 rounded border border-[#333] text-xs">
               <FaLinkedin size={14} /> LinkedIn
             </a>
-            <a href="https://leetcode.com/u/surya" target="_blank" rel="noreferrer" className="flex items-center gap-2 px-3 py-1.5 rounded border border-[#333] text-xs">
+            <a href="https://leetcode.com/u/bussasurya/" target="_blank" rel="noreferrer" className="flex items-center gap-2 px-3 py-1.5 rounded border border-[#333] text-xs">
               <SiLeetcode size={14} /> LeetCode
             </a>
-            <a href="mailto:surya@example.com" className="flex items-center gap-2 px-3 py-1.5 rounded border border-[#333] text-xs">
+            <a href="mailto:suryabussa12@gmail.com" className="flex items-center gap-2 px-3 py-1.5 rounded border border-[#333] text-xs">
               <FiMail size={14} /> Email
             </a>
           </motion.div>

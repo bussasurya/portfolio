@@ -6,6 +6,10 @@
   font-weight: 800;
 }
 
+.subheading-font {
+  font-family: var(--font-jetbrains), monospace;
+}
+
 @theme {
   --color-vscode-bg: #1e1e1e;
   --color-vscode-sidebar: #252526;
