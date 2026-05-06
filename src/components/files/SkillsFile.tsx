@@ -6,29 +6,29 @@ const skillsData = [
     title: "Programming Languages",
     items: [
       { name: "Java", percent: 90, color: "#f89820" },
-      { name: "Python", percent: 88, color: "#ff79c6" },
-      { name: "C", percent: 85, color: "#4fc1ff" },
-      { name: "JavaScript", percent: 95, color: "#dcdcaa" },
-      { name: "SQL", percent: 85, color: "#c586c0" },
+      { name: "Python", percent: 78, color: "#ff79c6" },
+      { name: "C", percent: 75, color: "#4fc1ff" },
+      { name: "JavaScript", percent: 74, color: "#dcdcaa" },
+      { name: "SQL", percent: 80, color: "#c586c0" },
       { name: "Assembly", percent: 70, color: "#9cdcfe" }
     ]
   },
   {
     title: "Full Stack Development",
     items: [
-      { name: "React", percent: 92, color: "#00D4FF" },
-      { name: "Next.js", percent: 88, color: "#2dd4bf" },
-      { name: "Node.js", percent: 85, color: "#16A34A" },
-      { name: "Express.js", percent: 85, color: "#22c55e" },
-      { name: "Flask", percent: 82, color: "#facc15" },
-      { name: "REST APIs", percent: 90, color: "#c586c0" }
+      { name: "React", percent: 82, color: "#00D4FF" },
+      { name: "Next.js", percent: 81, color: "#2dd4bf" },
+      { name: "Node.js", percent: 79, color: "#16A34A" },
+      { name: "Express.js", percent: 70, color: "#22c55e" },
+      { name: "Flask", percent: 80, color: "#facc15" },
+      { name: "REST APIs", percent: 80, color: "#c586c0" }
     ]
   },
   {
     title: "Cloud & DevOps",
     items: [
       { name: "Microsoft Azure", percent: 85, color: "#4fc1ff" },
-      { name: "Google Cloud (GCP)", percent: 83, color: "#fbbc04" },
+      { name: "Google Cloud (GCP)", percent: 73, color: "#fbbc04" },
       { name: "Docker", percent: 88, color: "#2496ed" },
       { name: "Kubernetes", percent: 82, color: "#326ce5" },
       { name: "Jenkins", percent: 80, color: "#d33833" },
@@ -42,14 +42,14 @@ const skillsData = [
     title: "Databases & Caching",
     items: [
       { name: "SQL", percent: 88, color: "#c586c0" },
-      { name: "Redis", percent: 82, color: "#dc2626" }
+      { name: "Redis", percent: 72, color: "#dc2626" }
     ]
   },
   {
     title: "AI & ML",
     items: [
-      { name: "scikit-learn", percent: 85, color: "#f97316" },
-      { name: "Pandas", percent: 88, color: "#4fc1ff" },
+      { name: "scikit-learn", percent: 75, color: "#f97316" },
+      { name: "Pandas", percent: 78, color: "#4fc1ff" },
       { name: "Matplotlib", percent: 80, color: "#22c55e" },
       { name: "Neural Networks", percent: 78, color: "#a855f7" },
       { name: "Model Optimization", percent: 75, color: "#eab308" }
