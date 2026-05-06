@@ -13,6 +13,7 @@ interface StoreState {
   // Actions
   openFile: (fileName: string) => void;
   closeFile: (fileName: string) => void;
+  closeAllFiles: () => void;
   setActiveFile: (fileName: string) => void;
   setActiveSidebarPanel: (panel: 'explorer' | 'search' | 'sourceControl') => void;
   toggleTerminal: () => void;
@@ -36,13 +37,18 @@ export const useStore = create<StoreState>((set) => ({
   openedHistory: [],
 
   openFile: (fileName) => set((state) => {
+    const newHistory = state.openedHistory.includes(fileName) 
+      ? state.openedHistory 
+      : [...state.openedHistory, fileName];
+
     if (!state.openedFiles.includes(fileName)) {
       return { 
         openedFiles: [...state.openedFiles, fileName],
-        activeFile: fileName
+        activeFile: fileName,
+        openedHistory: newHistory
       };
     }
-    return { activeFile: fileName };
+    return { activeFile: fileName, openedHistory: newHistory };
   }),
 
   closeFile: (fileName) => set((state) => {
@@ -59,6 +65,8 @@ export const useStore = create<StoreState>((set) => ({
     }
     return { openedFiles: newOpened, activeFile: newActive };
   }),
+
+  closeAllFiles: () => set({ openedFiles: [], activeFile: null }),
 
   setActiveFile: (fileName) => set({ activeFile: fileName }),
   setActiveSidebarPanel: (panel) => set({ activeSidebarPanel: panel }),

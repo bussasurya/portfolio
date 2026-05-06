@@ -49,7 +49,7 @@ export default function Editor() {
   };
 
   return (
-    <div className="flex-1 overflow-y-auto bg-vscode-bg relative custom-scrollbar">
+    <div id="main-editor-container" className="flex-1 overflow-y-auto bg-vscode-bg relative custom-scrollbar select-text">
       <AnimatePresence mode="wait">
         <motion.div
           key={activeFile}

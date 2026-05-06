@@ -1,168 +1,268 @@
 'use client';
 import { motion, Variants } from 'framer-motion';
+import { Trophy, Award, Briefcase, Star } from 'lucide-react';
 
 const experiences = [
   {
-    company: "Tech Solutions Inc.",
-    role: "Frontend Developer",
-    period: "2023 - Present",
-    highlights: [
-      "Led the migration of a legacy app to Next.js, improving load times by 40%.",
-      "Developed an extensive UI component library used across 3 products."
+    period: "Jun 2024 – Jul 2025",
+    role: "Co-Lead, ACM Glitch",
+    organization: "ACM Student Chapter, Amritapuri Kerala, India",
+    description:
+      "Led and coordinated game development initiatives across 2D, 3D, and AR domains, guiding multiple teams to deliver high-quality interactive projects. Organized and executed 5+ technical events including hackathons, workshops, and coding sessions, improving member engagement and technical proficiency. Mentored 20+ members in game development, problem-solving, and emerging technologies, fostering a collaborative and growth-driven environment. Established industry collaborations and sponsorships, expanding chapter reach and enabling larger-scale technical events. Collaborated with leadership and faculty advisors to streamline operations and scale chapter activities effectively.",
+    tags: [
+      "Unity",
+      "Game Development",
+      "AR/VR",
+      "Leadership",
+      "Hackathons",
+      "Mentoring",
+      "Team Management",
+      "Technical Events"
     ]
+  }
+];
+const hackathons = [
+  {
+    project: "AeroFlare ",
+    name: "CMR HACKFEST 3.0",
+    year: "2026",
+    description: "Engineered a real-time 3D geospatial wildfire prediction platform using NASA FIRMS data, achieving 90% directional accuracy.",
+    badge: "Top Project 🌟",
+    colorTheme: {
+      bg: "bg-[#4fc1ff]/10",
+      text: "text-[#4fc1ff]",
+      border: "border-[#4fc1ff]/50",
+      shadow: "shadow-[0_0_12px_rgba(79,193,255,0.4)]",
+      hoverBorder: "hover:border-[#4fc1ff]/50",
+      gradient: "from-[#4fc1ff]/5",
+      hoverText: "group-hover:text-[#4fc1ff]"
+    }
   },
   {
-    company: "Startup Co.",
-    role: "Junior Web Developer",
-    period: "2021 - 2023",
-    highlights: [
-      "Implemented responsive designs using Tailwind CSS.",
-      "Integrated RESTful APIs into React frontend."
-    ]
+    project: "Ecolink ",
+    name: "Brinhack 2025",
+    year: "2025",
+    description: "Developed Ecolink, an AI-driven food donation and sustainability platform optimizing pickup routes to reduce food waste.",
+    badge: "Finalist 🏅",
+    colorTheme: {
+      bg: "bg-[#9333EA]/10",
+      text: "text-[#d8b4fe]",
+      border: "border-[#9333EA]/50",
+      shadow: "shadow-[0_0_12px_rgba(147,51,234,0.4)]",
+      hoverBorder: "hover:border-[#9333EA]/50",
+      gradient: "from-[#9333EA]/5",
+      hoverText: "group-hover:text-[#d8b4fe]"
+    }
+  },
+  {
+    project: "FramFlow",
+    name: "EvoLumin Hackathon",
+    year: "2024",
+    description: "Built a farmer-centric platform integrating real-time weather forecasts, pest identification, and market insights.",
+    badge: "Runner-Up 🥈",
+    colorTheme: {
+      bg: "bg-[#D97706]/10",
+      text: "text-[#fbbf24]",
+      border: "border-[#D97706]/50",
+      shadow: "shadow-[0_0_12px_rgba(217,119,6,0.4)]",
+      hoverBorder: "hover:border-[#D97706]/50",
+      gradient: "from-[#D97706]/5",
+      hoverText: "group-hover:text-[#fbbf24]"
+    }
+  }
+];
+
+const programs = [
+  {
+    title: "McKinsey Forward Program",
+    badge: "Selected",
+    year: "2024",
+    description: "Selected for the McKinsey Forward program, focusing on foundational skills in leadership, business strategy, and complex problem-solving."
+  }
+];
+
+
+const certifications = [
+  {
+    title: "AWS Certified Developer – Associate",
+    issuer: "Amazon Web Services",
+    date: "Aug 2023"
+  },
+  {
+    title: "Meta Front-End Developer Professional Certificate",
+    issuer: "Coursera",
+    date: "Jan 2023"
   }
 ];
 
 export default function ExperienceFile({ hasBeenOpened }: { hasBeenOpened: boolean }) {
-
-  const container: Variants = {
-    hidden: { opacity: hasBeenOpened ? 1 : 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: hasBeenOpened ? 0 : 0.15
-      }
-    }
-  };
-
-  const item: Variants = {
-    hidden: {
-      opacity: hasBeenOpened ? 1 : 0,
-      x: hasBeenOpened ? 0 : -10
-    },
-    visible: {
-      opacity: 1,
-      x: 0,
-      transition: {
-        duration: 0.25,
-        ease: "easeOut" as const
-      }
-    }
-  };
-
-  let lineCounter = 1;
+  const dly = (n: number) => hasBeenOpened ? 0 : n;
 
   return (
     <motion.div
-      initial={hasBeenOpened ? "visible" : "hidden"}
-      animate="visible"
-      variants={container}
-      className="pt-2 px-6 font-mono text-[13px] text-[#cccccc] leading-[18px] w-full h-full"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.3 }}
+      className="experience-page font-mono text-[#d4d4d4] text-[14px] leading-[24px] p-6 max-w-4xl mx-auto flex flex-col gap-6 w-full h-full overflow-y-auto custom-scrollbar bg-[#1e1e1e]"
     >
-      <div className="flex mb-2">
-        <span className="text-[#858585] min-w-[3em] text-right pr-4 select-none block">{lineCounter++}</span>
-        <span className="text-[#6A9955]">// Work Experience Timeline</span>
-      </div>
+      {/* Experience Header */}
+      <motion.div
+        initial={{ opacity: 0, y: 15 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5, delay: dly(0.1) }}
+        className="experience-header flex flex-col gap-2"
+      >
+        <div className="code-line text-[#6A9955] text-sm">{'// experience.ts -- career journey and roles'}</div>
+        <h1 className="heading-font text-4xl md:text-5xl font-bold text-white tracking-tight">Experience</h1>
+        <p className="subtitle text-[#858585] mt-1 font-mono text-sm">{'<Timeline />'}</p>
+      </motion.div>
 
-      <div className="flex">
-        <span className="text-[#858585] min-w-[3em] text-right pr-4 select-none block">{lineCounter++}</span>
-      </div>
+      {/* Experience Timeline Section */}
+      <motion.div
+        initial={{ opacity: 0, y: 15 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5, delay: dly(0.2) }}
+        className="timeline-section relative border-l border-[#3c3c3c] ml-3 md:ml-4 mt-4"
+      >
+        {experiences.map((exp, idx) => (
+          <div key={idx} className="mb-10 ml-8 relative">
+            <div className="absolute -left-[39px] md:-left-[41px] top-1.5 w-3.5 h-3.5 bg-[#4fc1ff] rounded-full ring-4 ring-[#1e1e1e]"></div>
 
-      <div className="flex">
-        <span className="text-[#858585] min-w-[3em] text-right pr-4 select-none block">{lineCounter++}</span>
-        <span>
-          <span className="text-[#c586c0]">export</span>{" "}
-          <span className="text-[#569cd6]">const</span>{" "}
-          <span className="text-[#4fc1ff]">experiences</span>{" "}
-          <span className="text-[#569cd6]">:</span>{" "}
-          <span className="text-[#4ec9b0]">Experience</span>
-          <span className="text-[#ffd700]">[]</span>{" "}
-          <span className="text-[#d4d4d4]">=</span>{" "}
-          <span className="text-[#da70d6]">[</span>
-        </span>
-      </div>
+            <div className="bg-[#252526] border border-[#333] rounded-lg p-5 hover:border-[#4fc1ff]/50 hover:bg-[#2a2d2e] transition-colors shadow-sm">
+              <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center mb-2">
+                <h3 className="subheading-font text-xl font-bold text-[#e0e0e0] flex items-center gap-2">
+                  <Briefcase className="w-5 h-5 text-[#4fc1ff]" />
+                  {exp.role}
+                </h3>
+                <span className="year text-[#6A9955] font-bold border border-[#6A9955]/30 bg-[#6A9955]/10 px-3 py-1 rounded text-sm mt-2 sm:mt-0 w-fit">
+                  {exp.period}
+                </span>
+              </div>
 
-      {experiences.map((exp, idx) => {
-        const startLine = lineCounter;
-        lineCounter += 7;
+              <div className="text-[#4fc1ff] font-medium mb-3">{exp.organization}</div>
+              <p className="text-[#cccccc] mb-4">
+                {exp.description}
+              </p>
 
-        return (
-          <motion.div
-            key={idx}
-            variants={item}
-            className="flex flex-col border-l-2 border-[#454545] ml-[4.5em] pl-4 my-2 relative"
-          >
-            <div className="absolute -left-[9px] top-2 w-4 h-4 rounded-full bg-[#0e639c] border-2 border-[#1e1e1e]" />
-
-            <div className="flex -ml-[4.5em] pl-[4.5em]">
-              <span className="text-[#858585] min-w-[3em] text-right pr-4 select-none block absolute left-0">
-                {startLine}
-              </span>
-              <span className="text-[#ffd700]">{'{'}</span>
+              <div className="flex flex-wrap gap-2">
+                {exp.tags.map((tag, tagIdx) => (
+                  <span
+                    key={tagIdx}
+                    className="px-2.5 py-1 text-xs font-mono bg-[#1e1e1e] text-[#dcdcaa] border border-[#3c3c3c] rounded-full"
+                  >
+                    {tag}
+                  </span>
+                ))}
+              </div>
             </div>
+          </div>
+        ))}
+      </motion.div>
 
-            <div className="flex -ml-[4.5em] pl-[4.5em]">
-              <span className="text-[#858585] absolute left-0">{startLine + 1}</span>
-              <span className="pl-6">
-                <span className="text-[#9cdafe]">company:</span>{" "}
-                <span className="text-[#ce9178]">"{exp.company}"</span>,
-              </span>
-            </div>
+      {/* Achievements Header */}
+      <motion.div
+        initial={{ opacity: 0, y: 15 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5, delay: dly(0.3) }}
+        className="achievements-header flex flex-col gap-2 mt-8"
+      >
+        <div className="code-line text-[#6A9955] text-sm">{'// achievements.ts -- milestones and accomplishments'}</div>
+        <h1 className="heading-font text-4xl md:text-5xl font-bold text-white tracking-tight">Achievements</h1>
+      </motion.div>
 
-            <div className="flex -ml-[4.5em] pl-[4.5em]">
-              <span className="text-[#858585] absolute left-0">{startLine + 2}</span>
-              <span className="pl-6">
-                <span className="text-[#9cdafe]">role:</span>{" "}
-                <span className="text-[#ce9178]">"{exp.role}"</span>,
-              </span>
-            </div>
+      {/* Achievements Content Sections */}
+      <div className="space-y-8">
 
-            <div className="flex -ml-[4.5em] pl-[4.5em]">
-              <span className="text-[#858585] absolute left-0">{startLine + 3}</span>
-              <span className="pl-6">
-                <span className="text-[#9cdafe]">period:</span>{" "}
-                <span className="text-[#ce9178]">"{exp.period}"</span>,
-              </span>
-            </div>
-
-            <div className="flex -ml-[4.5em] pl-[4.5em]">
-              <span className="text-[#858585] absolute left-0">{startLine + 4}</span>
-              <span className="pl-6">
-                <span className="text-[#9cdafe]">highlights:</span>{" "}
-                <span className="text-[#cca700]">[</span>
-              </span>
-            </div>
-
-            <div className="flex -ml-[4.5em] pl-[4.5em] flex-col">
-              <span className="text-[#858585] absolute left-0">{startLine + 5}</span>
-              {exp.highlights.map((h, i) => (
-                <div key={i} className="pl-12">
-                  <span className="text-[#ce9178]">"{h}"</span>
-                  {i < exp.highlights.length - 1 ? ',' : ''}
+        {/* Hackathons */}
+        <motion.div
+          initial={{ opacity: 0, y: 15 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: dly(0.4) }}
+        >
+          <h2 className="subheading-font flex items-center gap-2 text-2xl font-bold text-white border-b border-[#333] pb-2 uppercase tracking-wider mb-4">
+            <Trophy className="w-6 h-6 text-[#D97706]" />
+            Hackathons
+          </h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {hackathons.map((h, idx) => (
+              <div key={idx} className={`bg-[#252526] border border-[#333] p-4 rounded-lg ${h.colorTheme.hoverBorder} hover:bg-[#2a2d2e] transition-all duration-300 cursor-default relative group overflow-hidden`}>
+                <div className={`absolute inset-0 bg-gradient-to-br ${h.colorTheme.gradient} to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500`}></div>
+                <div className="relative z-10">
+                  <div className="flex justify-between items-start mb-2 gap-3">
+                    <h4 className={`subheading-font text-lg font-bold text-[#e0e0e0] leading-tight ${h.colorTheme.hoverText} transition-colors`}>{h.project}</h4>
+                    <span className={`inline-flex items-center px-4 py-1.5 rounded-md text-sm font-bold ${h.colorTheme.bg} ${h.colorTheme.text} border ${h.colorTheme.border} ${h.colorTheme.shadow} whitespace-nowrap shrink-0`}>
+                      {h.badge}
+                    </span>
+                  </div>
+                  <div className="text-[#4fc1ff] font-medium mb-1">{h.name}</div>
+                  <div className="text-[#858585] text-xs font-mono mb-3">{h.year}</div>
+                  <p className="text-[#cccccc] text-sm leading-relaxed">{h.description}</p>
                 </div>
-              ))}
-            </div>
+              </div>
+            ))}
+          </div>
+        </motion.div>
 
-            <div className="flex -ml-[4.5em] pl-[4.5em]">
-              <span className="text-[#858585] absolute left-0">{startLine + 6}</span>
-              <span className="pl-6 text-[#cca700]">]</span>
-            </div>
+        {/* Programs */}
+        <motion.div
+          initial={{ opacity: 0, y: 15 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: dly(0.45) }}
+          className="mt-8"
+        >
+          <h2 className="subheading-font flex items-center gap-2 text-2xl font-bold text-white border-b border-[#333] pb-2 uppercase tracking-wider mb-4">
+            <Star className="w-6 h-6 text-[#9333EA]" />
+            Programs
+          </h2>
+          <div className="grid grid-cols-1 gap-4">
+            {programs.map((p, idx) => (
+              <div key={idx} className="bg-[#252526] border border-[#333] p-4 rounded-lg hover:border-[#9333EA]/50 hover:bg-[#2a2d2e] transition-all duration-300 cursor-default relative group overflow-hidden">
+                <div className="absolute inset-0 bg-gradient-to-br from-[#9333EA]/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                <div className="relative z-10">
+                  <div className="flex justify-between items-start mb-2 gap-3">
+                    <h4 className="subheading-font text-lg font-bold text-[#e0e0e0] leading-tight group-hover:text-[#c084fc] transition-colors">{p.title}</h4>
+                    <span className="inline-flex items-center px-3 py-1 rounded text-xs font-bold bg-[#9333EA]/10 text-[#d8b4fe] border border-[#9333EA]/50 shadow-[0_0_12px_rgba(147,51,234,0.4)] whitespace-nowrap shrink-0">
+                      {p.badge}
+                    </span>
+                  </div>
+                  <div className="text-[#858585] text-xs font-mono mb-3">{p.year}</div>
+                  <p className="text-[#cccccc] text-sm leading-relaxed">{p.description}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </motion.div>
 
-            <div className="flex -ml-[4.5em] pl-[4.5em]">
-              <span className="text-[#858585] absolute left-0">{startLine + 7}</span>
-              <span className="text-[#ffd700]">
-                {'}'}{idx < experiences.length - 1 ? ',' : ''}
-              </span>
-            </div>
-          </motion.div>
-        );
-      })}
 
-      <div className="flex mt-2">
-        <span className="text-[#858585] min-w-[3em] text-right pr-4 select-none block">
-          {lineCounter}
-        </span>
-        <span className="text-[#da70d6]">]</span>;
+        {/* Certifications */}
+        <motion.div
+          initial={{ opacity: 0, y: 15 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: dly(0.6) }}
+        >
+          <h2 className="subheading-font flex items-center gap-2 text-2xl font-bold text-white border-b border-[#333] pb-2 uppercase tracking-wider mb-4">
+            <Award className="w-6 h-6 text-[#ee0000]" />
+            Certifications
+          </h2>
+          <div className="flex flex-col gap-4">
+            {certifications.map((c, idx) => (
+              <div key={idx} className="flex flex-col sm:flex-row sm:justify-between sm:items-center p-4 bg-[#252526] rounded-lg border border-[#333] hover:border-[#ee0000]/50 hover:bg-[#2a2d2e] transition-colors cursor-default">
+                <div>
+                  <span className="subheading-font text-[#e0e0e0] font-bold block mb-1 text-lg">{c.title}</span>
+                  <span className="text-[#4fc1ff]">{c.issuer}</span>
+                </div>
+                <span className="year text-[#6A9955] font-bold border border-[#6A9955]/30 bg-[#6A9955]/10 px-3 py-1 rounded text-sm mt-3 sm:mt-0 w-fit">
+                  {c.date}
+                </span>
+              </div>
+            ))}
+          </div>
+        </motion.div>
+
       </div>
+
+      {/* Spacer for bottom padding */}
+      <div className="pb-8"></div>
     </motion.div>
   );
 }

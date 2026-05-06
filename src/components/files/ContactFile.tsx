@@ -6,9 +6,9 @@ import React from 'react';
 // Data for left section
 const socialLinks = [
   { platform: "Email", url: "suryabussa12@gmail.com", href: "mailto:suryabussa12@gmail.com", icon: FaEnvelope, color: "#4fc1ff" },
-  { platform: "LinkedIn", url: "linkedin.com/in/surya", href: "https://linkedin.com/in/surya", icon: FaLinkedin, color: "#0077b5" },
-  { platform: "GitHub", url: "github.com/surya", href: "https://github.com/surya", icon: FaGithub, color: "#d4d4d4" },
-  { platform: "LeetCode", url: "leetcode.com/surya", href: "https://leetcode.com/surya", icon: FaCode, color: "#ffa116" },
+  { platform: "LinkedIn", url: "linkedin.com/in/bussasurya", href: "https://linkedin.com/in/bussasurya", icon: FaLinkedin, color: "#0077b5" },
+  { platform: "GitHub", url: "github.com/bussasurya", href: "https://github.com/bussasurya", icon: FaGithub, color: "#d4d4d4" },
+  { platform: "LeetCode", url: "leetcode.com/bussasurya", href: "https://leetcode.com/u/bussasurya/", icon: FaCode, color: "#ffa116" },
   { platform: "Instagram", url: "instagram.com/surya", href: "https://instagram.com/surya", icon: FaInstagram, color: "#e1306c" }
 ];
 
