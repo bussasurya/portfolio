@@ -13,48 +13,37 @@ const projects = [
     live: "https://legallink.vercel.app"
   },
   {
-    name: "DSA Mentorship Platform",
-    icon: "🧠", // LOGIC / DSA
-    description: "A modern platform for connecting mentors and mentees with integrated payment and booking features.",
-    tags: "FULL STACK • PLATFORM",
-    techStack: ["React", "Firebase", "Tailwind CSS"],
-    github: "https://github.com/surya/dsamentor",
-  },
-  {
-    name: "Space Portfolio 3D",
-    icon: "🌐", // WEB / WORLD / 3D
-    description: "Futuristic 3D space-themed portfolio with interactive planets and smooth GSAP animations.",
-    tags: "3D WEB • ANIMATION",
-    techStack: ["Three.js", "React Three Fiber", "GSAP"],
-    github: "https://github.com/surya/space-portfolio",
-    live: "https://space.surya.dev"
-  },
-  {
-    name: "AI Image Generator",
-    icon: "🤖", // AI
-    description: "A serverless AI-powered image generation tool using Stable Diffusion APIs and responsive React frontend.",
-    tags: "AI • FULL STACK",
-    techStack: ["Next.js", "OpenAI API", "Vercel"],
-    github: "https://github.com/surya/ai-image-gen",
-    live: "https://ai-gen.surya.dev"
-  },
-  {
-    name: "AI Image Generator",
+    name: "Fine-Tuned LLaMA 8B Legal AI",
     icon: "🤖",
-    description: "A serverless AI-powered image generation tool using Stable Diffusion APIs and responsive React frontend.",
-    tags: "AI • FULL STACK",
-    techStack: ["Next.js", "OpenAI API", "Vercel"],
-    github: "https://github.com/surya/ai-image-ge",
-    live: "https://ai-gen.surya.dev"
+    description: "Developed a context-aware Legal AI system by fine-tuning a LLaMA-based 8B model on Indian legal datasets using LoRA and Unsloth. Integrated RAG with FAISS and Sentence-BERT to improve legal reasoning, grounding, and reduce hallucinations in domain-specific Q&A.",
+    tags: "LLM • RAG • LEGAL AI",
+    techStack: ["PyTorch", "Transformers", "FAISS", "LoRA", "Sentence-BERT", "Unsloth"],
+    github: "https://github.com/bussasurya/Finetuned-Legal-chatbot",
   },
   {
-    name: "AI Image Generator",
+    name: "AeroFlare ",
+    icon: "🌎",
+    description: "Built a real-time 3D wildfire prediction and visualization platform . Integrated live Nasa satellite, wind, weather, and terrain data to simulate wildfire spread with predictive threat cones and tactical disaster intelligence.",
+    tags: "AI • GIS • DISASTER TECH",
+    techStack: ["React", "Deck.gl", "MapLibre", "Three.js", "Python", "NASA FIRMS"],
+    github: "https://github.com/bussasurya/Aeroflare",
+  },
+  {
+    name: "Clinical Reasoning AI with Mistral 7B",
     icon: "🤖",
-    description: "A serverless AI-powered image generation tool using Stable Diffusion APIs and responsive React frontend.",
-    tags: "AI • FULL STACK",
-    techStack: ["Next.js", "OpenAI API", "Vercel"],
-    github: "https://github.com/surya/ai-imag-gen",
-    live: "https://ai-gen.surya.dev"
+    description: "Fine-tuned a 4-bit Mistral 7B model using QLoRA and Unsloth for clinical reasoning and medical decision support. Built a data-centric RAG pipeline with FAISS and Sentence-BERT to improve retrieval precision, reduce noise, and enhance medical inference accuracy.",
+    tags: "LLM • RAG • HEALTH AI",
+    techStack: ["PyTorch", "QLoRA", "Unsloth", "FAISS", "BioGPT", "Sentence-BERT"],
+    github: "https://github.com/surya/clinical-ai",
+  },
+
+  {
+    name: "Distributed Event Streaming Engine",
+    icon: "⚙️",
+    description: "Engineered a high-throughput distributed event streaming platform inspired by Kafka architecture with scalable pub-sub messaging, fault-tolerant replication, and real-time event processing for large-scale backend systems.",
+    tags: "SYSTEM DESIGN • DISTRIBUTED SYSTEMS",
+    techStack: ["Go", "Kafka", "gRPC", "Docker", "Kubernetes", "Redis"],
+    github: "https://github.com/surya/event-stream-engine",
   }
 ];
 

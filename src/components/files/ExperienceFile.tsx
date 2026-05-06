@@ -76,7 +76,7 @@ const programs = [
   {
     title: "McKinsey Forward Program",
     badge: "Selected",
-    year: "2024",
+    year: "2026",
     description: "Selected for the McKinsey Forward program, focusing on foundational skills in leadership, business strategy, and complex problem-solving."
   }
 ];
@@ -84,14 +84,10 @@ const programs = [
 
 const certifications = [
   {
-    title: "AWS Certified Developer – Associate",
-    issuer: "Amazon Web Services",
-    date: "Aug 2023"
-  },
-  {
-    title: "Meta Front-End Developer Professional Certificate",
-    issuer: "Coursera",
-    date: "Jan 2023"
+    title: "Google AI Essentials",
+    issuer: "Google ",
+    date: "Apr 2025",
+
   }
 ];
 
@@ -221,7 +217,7 @@ export default function ExperienceFile({ hasBeenOpened }: { hasBeenOpened: boole
                 <div className="relative z-10">
                   <div className="flex justify-between items-start mb-2 gap-3">
                     <h4 className="subheading-font text-lg font-bold text-[#e0e0e0] leading-tight group-hover:text-[#c084fc] transition-colors">{p.title}</h4>
-                    <span className="inline-flex items-center px-3 py-1 rounded text-xs font-bold bg-[#9333EA]/10 text-[#d8b4fe] border border-[#9333EA]/50 shadow-[0_0_12px_rgba(147,51,234,0.4)] whitespace-nowrap shrink-0">
+                    <span className="inline-flex items-center px-4 py-2 rounded text-xs font-bold bg-[#9333EA]/10 text-[#d8b4fe] border border-[#9333EA]/50 shadow-[0_0_12px_rgba(147,51,234,0.4)] whitespace-nowrap shrink-0">
                       {p.badge}
                     </span>
                   </div>

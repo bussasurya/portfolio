@@ -19,10 +19,10 @@ export default function Sidebar() {
       <div className="flex-1 overflow-y-auto w-full pb-4 custom-scrollbar">
         {/* Accordion Context */}
         <div 
-          className="flex items-center px-1 py-1 cursor-pointer hover:bg-[#2a2d2e] border-t border-[#3c3c3c] border-opacity-30 group"
+          className="flex items-center px-1 py-1 cursor-pointer hover:bg-[#2a2d2e] border-t border-[#3c3c3c] border-opacity-30 group text-[#858585]"
           onClick={() => setIsOpen(!isOpen)}
         >
-          {isOpen ? <VscChevronDown className="mr-0.5 text-[16px]" /> : <VscChevronRight className="mr-0.5 text-[16px]" />}
+          {isOpen ? <VscChevronDown className="mr-0.5 text-[16px] opacity-70" /> : <VscChevronRight className="mr-0.5 text-[16px] opacity-70" />}
           <span className="text-[11px] font-bold tracking-wide uppercase">Portfolio</span>
         </div>
 
@@ -30,9 +30,9 @@ export default function Sidebar() {
         {isOpen && (
           <div className="flex flex-col w-full">
             {/* Folder Mock */}
-            <div className="flex items-center py-1 pl-[22px] cursor-pointer hover:bg-[#2a2d2e]">
-              <VscChevronDown className="mr-1 text-[16px]" />
-              <VscCollapseAll className="mr-1.5 text-[16px] text-[#dcb67a]" />
+            <div className="flex items-center py-1 pl-[22px] cursor-pointer hover:bg-[#2a2d2e] text-[#858585]">
+              <VscChevronDown className="mr-1 text-[16px] opacity-70" />
+              <VscCollapseAll className="mr-1.5 text-[16px] text-[#dcb67a] opacity-60 grayscale-[30%]" />
               <span className="text-[13px] tracking-tight">src</span>
             </div>
             
@@ -46,10 +46,10 @@ export default function Sidebar() {
                     key={file.name}
                     onClick={() => openFile(file.name)}
                     className={`flex items-center py-[3px] pl-[44px] pr-2 cursor-pointer text-[13px] transition-colors ${
-                      isActive ? 'bg-[#37373d] text-white' : 'hover:bg-[#2a2d2e] text-[#cccccc]'
+                      isActive ? 'bg-[#37373d] text-white' : 'hover:bg-[#2a2d2e] text-[#858585]'
                     }`}
                   >
-                    <Icon className="mr-2 text-[16px] shrink-0" style={{ color: file.color }} />
+                    <Icon className={`mr-2 text-[16px] shrink-0 ${isActive ? '' : 'opacity-60 grayscale-[30%]'}`} style={{ color: file.color }} />
                     <span className="truncate tracking-tight">{file.name}</span>
                   </div>
                 );

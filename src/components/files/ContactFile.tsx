@@ -13,6 +13,39 @@ const socialLinks = [
 ];
 
 export default function ContactFile({ hasBeenOpened }: { hasBeenOpened: boolean }) {
+  const [status, setStatus] = React.useState<"idle" | "loading" | "success" | "error">("idle");
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setStatus("loading");
+    
+    const formData = new FormData(e.currentTarget);
+    const data = Object.fromEntries(formData.entries());
+    
+    try {
+      const response = await fetch("https://formsubmit.co/ajax/suryabussa12@gmail.com", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Accept": "application/json"
+        },
+        body: JSON.stringify(data)
+      });
+      
+      if (response.ok) {
+        setStatus("success");
+        (e.target as HTMLFormElement).reset();
+        setTimeout(() => setStatus("idle"), 5000);
+      } else {
+        setStatus("error");
+        setTimeout(() => setStatus("idle"), 5000);
+      }
+    } catch (error) {
+      setStatus("error");
+      setTimeout(() => setStatus("idle"), 5000);
+    }
+  };
+
   const container: Variants = {
     hidden: { opacity: hasBeenOpened ? 1 : 0 },
     visible: { opacity: 1, transition: { staggerChildren: hasBeenOpened ? 0 : 0.1 } }
@@ -105,15 +138,18 @@ export default function ContactFile({ hasBeenOpened }: { hasBeenOpened: boolean 
             SEND A MESSAGE
           </h2>
 
-          <form className="flex flex-col gap-5 bg-[#252526] p-6 rounded-lg border border-[#333]" onSubmit={(e) => e.preventDefault()}>
+          <form className="flex flex-col gap-5 bg-[#252526] p-6 rounded-lg border border-[#333]" onSubmit={handleSubmit}>
+            <input type="hidden" name="_captcha" value="false" />
 
             <div className="flex flex-col gap-1">
               <label className="text-[#6A9955] text-xs mb-1">{'// YOUR_NAME *'}</label>
               <input
                 type="text"
+                name="name"
                 placeholder='"string"'
                 required
-                className="bg-[#1e1e1e] border border-[#3c3c3c] rounded p-2.5 text-[#cccccc] font-mono text-sm focus:outline-none focus:border-[#4fc1ff] focus:shadow-[0_0_8px_rgba(79,193,255,0.15)] transition-all placeholder:text-[#555]"
+                disabled={status === "loading"}
+                className="bg-[#1e1e1e] border border-[#3c3c3c] rounded p-2.5 text-[#cccccc] font-mono text-sm focus:outline-none focus:border-[#4fc1ff] focus:shadow-[0_0_8px_rgba(79,193,255,0.15)] transition-all placeholder:text-[#555] disabled:opacity-50"
               />
             </div>
 
@@ -121,9 +157,11 @@ export default function ContactFile({ hasBeenOpened }: { hasBeenOpened: boolean 
               <label className="text-[#6A9955] text-xs mb-1">{'// YOUR_EMAIL *'}</label>
               <input
                 type="email"
+                name="email"
                 placeholder='"string"'
                 required
-                className="bg-[#1e1e1e] border border-[#3c3c3c] rounded p-2.5 text-[#cccccc] font-mono text-sm focus:outline-none focus:border-[#4fc1ff] focus:shadow-[0_0_8px_rgba(79,193,255,0.15)] transition-all placeholder:text-[#555]"
+                disabled={status === "loading"}
+                className="bg-[#1e1e1e] border border-[#3c3c3c] rounded p-2.5 text-[#cccccc] font-mono text-sm focus:outline-none focus:border-[#4fc1ff] focus:shadow-[0_0_8px_rgba(79,193,255,0.15)] transition-all placeholder:text-[#555] disabled:opacity-50"
               />
             </div>
 
@@ -131,30 +169,45 @@ export default function ContactFile({ hasBeenOpened }: { hasBeenOpened: boolean 
               <label className="text-[#6A9955] text-xs mb-1">{'// SUBJECT'}</label>
               <input
                 type="text"
+                name="_subject"
                 placeholder='"string"'
-                className="bg-[#1e1e1e] border border-[#3c3c3c] rounded p-2.5 text-[#cccccc] font-mono text-sm focus:outline-none focus:border-[#4fc1ff] focus:shadow-[0_0_8px_rgba(79,193,255,0.15)] transition-all placeholder:text-[#555]"
+                disabled={status === "loading"}
+                className="bg-[#1e1e1e] border border-[#3c3c3c] rounded p-2.5 text-[#cccccc] font-mono text-sm focus:outline-none focus:border-[#4fc1ff] focus:shadow-[0_0_8px_rgba(79,193,255,0.15)] transition-all placeholder:text-[#555] disabled:opacity-50"
               />
             </div>
 
             <div className="flex flex-col gap-1">
               <label className="text-[#6A9955] text-xs mb-1">{'// MESSAGE *'}</label>
               <textarea
+                name="message"
                 placeholder='"your message"'
                 required
                 rows={4}
-                className="bg-[#1e1e1e] border border-[#3c3c3c] rounded p-2.5 text-[#cccccc] font-mono text-sm focus:outline-none focus:border-[#4fc1ff] focus:shadow-[0_0_8px_rgba(79,193,255,0.15)] transition-all resize-y placeholder:text-[#555] custom-scrollbar"
+                disabled={status === "loading"}
+                className="bg-[#1e1e1e] border border-[#3c3c3c] rounded p-2.5 text-[#cccccc] font-mono text-sm focus:outline-none focus:border-[#4fc1ff] focus:shadow-[0_0_8px_rgba(79,193,255,0.15)] transition-all resize-y placeholder:text-[#555] custom-scrollbar disabled:opacity-50"
               />
             </div>
 
             <button
               type="submit"
-              className="mt-2 w-full py-3 bg-[#0e639c] hover:bg-[#1177bb] text-white font-mono font-bold rounded flex justify-center items-center gap-2 transition-colors focus:outline-none focus:ring-2 focus:ring-[#4fc1ff] focus:ring-offset-2 focus:ring-offset-[#252526]"
+              disabled={status === "loading" || status === "success"}
+              className="mt-2 w-full py-3 bg-[#0e639c] hover:bg-[#1177bb] disabled:bg-[#333] disabled:text-[#858585] text-white font-mono font-bold rounded flex justify-center items-center gap-2 transition-colors focus:outline-none focus:ring-2 focus:ring-[#4fc1ff] focus:ring-offset-2 focus:ring-offset-[#252526]"
             >
-              <span className="text-[#4fc1ff]">→</span> send_message()
+              {status === "loading" ? (
+                <span>Sending...</span>
+              ) : status === "success" ? (
+                <span className="text-[#6A9955]">Message Sent!</span>
+              ) : status === "error" ? (
+                <span className="text-[#f44336]">Error. Try Again.</span>
+              ) : (
+                <>
+                  <span className="text-[#4fc1ff]">→</span> send_message()
+                </>
+              )}
             </button>
 
             <p className="text-center text-[10px] text-[#858585] mt-2">
-              {'// Powered by Formspree (lands directly in my inbox) :p'}
+              {'// Powered by FormSubmit (lands directly in my inbox) :p'}
             </p>
           </form>
 

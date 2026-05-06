@@ -10,9 +10,9 @@ export default function TitleBar() {
   const fileMenuRef = useRef<HTMLDivElement>(null);
   const editMenuRef = useRef<HTMLDivElement>(null);
   
-  const { openFile, closeFile, closeAllFiles, activeFile, setCommandPaletteOpen, openedHistory } = useStore();
+  const { openFile, closeFile, closeAllFiles, activeFile, setCommandPaletteOpen, openedHistory, toggleCopilot } = useStore();
 
-  const menus = ["File", "Edit", "Selection", "View", "Go", "Run", "Terminal", "Help"];
+  const menus = ["File", "Edit", "View", "Go", "Run", "Terminal", "Help", "Copilot"];
 
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
@@ -125,6 +125,10 @@ export default function TitleBar() {
                 } else if (menu === 'Edit') {
                   setIsEditMenuOpen(!isEditMenuOpen);
                   setIsFileMenuOpen(false);
+                } else if (menu === 'Copilot') {
+                  toggleCopilot();
+                  setIsFileMenuOpen(false);
+                  setIsEditMenuOpen(false);
                 }
               }}
             >
