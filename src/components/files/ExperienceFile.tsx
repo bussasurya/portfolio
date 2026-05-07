@@ -1,6 +1,6 @@
 'use client';
 import { motion, Variants } from 'framer-motion';
-import { Trophy, Award, Briefcase, Star } from 'lucide-react';
+import { Trophy, Award, Briefcase, Star, BookOpen } from 'lucide-react';
 
 const experiences = [
   {
@@ -81,6 +81,15 @@ const programs = [
   }
 ];
 
+const publications = [
+  {
+    title: "High-Precision Real-Time Detection of Marine Fish Species Using Fine-Tuned YOLO Models",
+    publication: "IEEE Xplore — ACOIT 2025",
+    year: "2025",
+    description: "A deep learning research study on underwater object detection and marine species classification using fine-tuned YOLOv9 and YOLOv10 models for high-accuracy real-time detection.",
+    badge: "Published"
+  }
+];
 
 const certifications = [
   {
@@ -229,6 +238,36 @@ export default function ExperienceFile({ hasBeenOpened }: { hasBeenOpened: boole
           </div>
         </motion.div>
 
+        {/* Research Papers / Publications */}
+        <motion.div
+          initial={{ opacity: 0, y: 15 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: dly(0.5) }}
+          className="mt-8"
+        >
+          <h2 className="subheading-font flex items-center gap-2 text-2xl font-bold text-white border-b border-[#333] pb-2 uppercase tracking-wider mb-4">
+            <BookOpen className="w-6 h-6 text-[#10b981]" />
+            Research Papers / Publications
+          </h2>
+          <div className="grid grid-cols-1 gap-4">
+            {publications.map((pub, idx) => (
+              <div key={idx} className="bg-[#252526] border border-[#333] p-4 rounded-lg hover:border-[#10b981]/50 hover:bg-[#2a2d2e] transition-all duration-300 cursor-default relative group overflow-hidden">
+                <div className="absolute inset-0 bg-gradient-to-br from-[#10b981]/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                <div className="relative z-10">
+                  <div className="flex justify-between items-start mb-2 gap-3">
+                    <h4 className="subheading-font text-lg font-bold text-[#e0e0e0] leading-tight group-hover:text-[#34d399] transition-colors">{pub.title}</h4>
+                    <span className="inline-flex items-center px-4 py-2 rounded text-xs font-bold bg-[#10b981]/10 text-[#6ee7b7] border border-[#10b981]/50 shadow-[0_0_12px_rgba(16,185,129,0.4)] whitespace-nowrap shrink-0">
+                      {pub.badge}
+                    </span>
+                  </div>
+                  <div className="text-[#4fc1ff] font-medium mb-1">{pub.publication}</div>
+                  <div className="text-[#858585] text-xs font-mono mb-3">{pub.year}</div>
+                  <p className="text-[#cccccc] text-sm leading-relaxed">{pub.description}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </motion.div>
 
         {/* Certifications */}
         <motion.div
