@@ -11,13 +11,8 @@ export default function CommandPalette() {
   const [selectedIndex, setSelectedIndex] = useState(0);
   const inputRef = useRef<HTMLInputElement>(null);
 
-  const allCommands = [
-    { id: 'copilot', name: 'Open Copilot', type: 'command' }
-  ];
-
-  const filteredCommands = allCommands.filter(c => c.name.toLowerCase().includes(search.toLowerCase()));
   const filteredFiles = filesData.filter(f => f.name.toLowerCase().includes(search.toLowerCase())).map(f => ({ ...f, type: 'file' }));
-  const results = [...filteredCommands, ...filteredFiles];
+  const results = [...filteredFiles];
 
   useEffect(() => {
     setSelectedIndex(0);
@@ -25,30 +20,50 @@ export default function CommandPalette() {
 
   useEffect(() => {
     const handleGlobalKeyDown = (e: KeyboardEvent) => {
+      const isCmdOrCtrl = e.ctrlKey || e.metaKey;
+      const isP = e.key.toLowerCase() === 'p' || e.code === 'KeyP';
+      const isB = e.key.toLowerCase() === 'b' || e.code === 'KeyB';
+      const isC = e.key.toLowerCase() === 'c' || e.code === 'KeyC';
+      const isT = e.key.toLowerCase() === 't' || e.code === 'KeyT';
+      const isW = e.key.toLowerCase() === 'w' || e.code === 'KeyW';
+
       // Toggle terminal on Ctrl+` or Ctrl+~
-      if (e.ctrlKey && (e.key === '\`' || e.key === '~')) {
+      if (isCmdOrCtrl && (e.key === '\`' || e.key === '~' || e.code === 'Backquote')) {
         e.preventDefault();
         useStore.getState().toggleTerminal();
       }
       
       // Toggle Command Palette on Ctrl+P
-      if (e.ctrlKey && e.key === 'p') {
+      if (isCmdOrCtrl && isP) {
         e.preventDefault();
-        setCommandPaletteOpen(true);
+        setCommandPaletteOpen(!useStore.getState().commandPaletteOpen);
       }
       
-      if (e.key === 'Escape') {
+      // Toggle sidebar on Ctrl+B
+      if (isCmdOrCtrl && isB) {
+        e.preventDefault();
+        const state = useStore.getState();
+        state.setActiveSidebarPanel(state.activeSidebarPanel ? null : 'explorer');
+      }
+
+      // Toggle Copilot on Ctrl+Shift+C
+      if (isCmdOrCtrl && e.shiftKey && isC) {
+        e.preventDefault();
+        useStore.getState().toggleCopilot();
+      }
+      
+      if (e.key === 'Escape' || e.code === 'Escape') {
         setCommandPaletteOpen(false);
       }
 
       // New Tab (Ctrl+T)
-      if (e.ctrlKey && e.key === 't') {
+      if (isCmdOrCtrl && isT) {
         e.preventDefault();
         useStore.getState().openFile('home.tsx');
       }
 
       // Close Tab (Ctrl+W)
-      if (e.ctrlKey && e.key === 'w') {
+      if (isCmdOrCtrl && isW) {
         e.preventDefault();
         const state = useStore.getState();
         if (state.activeFile) {
@@ -57,8 +72,8 @@ export default function CommandPalette() {
       }
     };
 
-    window.addEventListener('keydown', handleGlobalKeyDown);
-    return () => window.removeEventListener('keydown', handleGlobalKeyDown);
+    document.addEventListener('keydown', handleGlobalKeyDown, { capture: true });
+    return () => document.removeEventListener('keydown', handleGlobalKeyDown, { capture: true });
   }, [setCommandPaletteOpen]);
 
   useEffect(() => {
@@ -70,11 +85,7 @@ export default function CommandPalette() {
   }, [commandPaletteOpen]);
 
   const handleSelect = (item: any) => {
-    if (item.type === 'command') {
-      if (item.id === 'copilot') {
-        useStore.getState().toggleCopilot();
-      }
-    } else if (item.type === 'file') {
+    if (item.type === 'file') {
       openFile(item.name);
     }
     setCommandPaletteOpen(false);
@@ -115,45 +126,31 @@ export default function CommandPalette() {
             className="fixed top-[20%] left-1/2 w-[600px] bg-[#252526] border border-[#454545] rounded-lg shadow-2xl z-[60] flex flex-col overflow-hidden max-w-[90vw]"
           >
             <div className="p-2 border-b border-[#454545]">
-              <div className="flex items-center bg-[#3c3c3c] px-3 py-2 rounded border border-[#3c3c3c] focus-within:border-[#007fd4]">
-                <VscChevronRight className="text-[#858585] mr-2" />
-                <input
-                  ref={inputRef}
-                  type="text"
-                  value={search}
-                  onChange={(e) => setSearch(e.target.value)}
-                  onKeyDown={handleInputKeyDown}
-                  className="bg-transparent w-full outline-none text-[#cccccc] text-[13px] placeholder-[#858585]"
-                  placeholder="Go to file or run command..."
-                />
+              <div className="flex items-center bg-[#3c3c3c] px-3 py-2 rounded border border-[#3c3c3c] focus-within:border-[#007fd4] justify-between">
+                <div className="flex items-center w-full">
+                  <VscChevronRight className="text-[#858585] mr-2 shrink-0" />
+                  <input
+                    ref={inputRef}
+                    type="text"
+                    value={search}
+                    onChange={(e) => setSearch(e.target.value)}
+                    onKeyDown={handleInputKeyDown}
+                    className="bg-transparent w-full outline-none text-[#cccccc] text-[13px] placeholder-[#858585]"
+                    placeholder="Search files by name..."
+                  />
+                </div>
+                <div className="flex items-center gap-2 shrink-0 ml-2">
+                  <span className="text-[10px] text-[#858585] bg-[#2a2d2e] border border-[#454545] px-1.5 py-0.5 rounded shadow-sm">
+                    ESC
+                  </span>
+                </div>
               </div>
             </div>
             {results.length > 0 && (
               <div className="max-h-[350px] overflow-y-auto py-2 custom-scrollbar">
-                {filteredCommands.length > 0 && (
-                  <div className="mb-2">
-                    <div className="px-4 py-1 text-[11px] text-[#858585] uppercase tracking-wider font-semibold">Commands</div>
-                    {filteredCommands.map(cmd => {
-                      const index = results.findIndex(r => r.name === cmd.name);
-                      const isSelected = index === selectedIndex;
-                      return (
-                        <div
-                          key={cmd.id}
-                          className={`flex items-center px-4 py-[6px] cursor-pointer text-[13px] ${isSelected ? 'bg-[#04395e] text-white' : 'text-[#cccccc] hover:bg-[#2a2d2e]'}`}
-                          onClick={() => handleSelect(cmd)}
-                          onMouseEnter={() => setSelectedIndex(index)}
-                        >
-                          <VscTerminalCmd className="mr-3 inline text-base" />
-                          <span>{cmd.name}</span>
-                        </div>
-                      );
-                    })}
-                  </div>
-                )}
-
                 {filteredFiles.length > 0 && (
                   <div>
-                    <div className="px-4 py-1 text-[11px] text-[#858585] uppercase tracking-wider font-semibold">Files</div>
+                    <div className="px-4 py-1 text-[11px] text-[#858585] uppercase tracking-wider font-semibold">FILES</div>
                     {filteredFiles.map(file => {
                       const index = results.findIndex(r => r.name === file.name);
                       const isSelected = index === selectedIndex;

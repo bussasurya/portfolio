@@ -6,9 +6,15 @@ import { useStore } from '../store/useStore';
 export default function TitleBar() {
   const [isFileMenuOpen, setIsFileMenuOpen] = useState(false);
   const [isEditMenuOpen, setIsEditMenuOpen] = useState(false);
+  const [isRunMenuOpen, setIsRunMenuOpen] = useState(false);
+  const [isHelpMenuOpen, setIsHelpMenuOpen] = useState(false);
+  const [isViewMenuOpen, setIsViewMenuOpen] = useState(false);
   
   const fileMenuRef = useRef<HTMLDivElement>(null);
   const editMenuRef = useRef<HTMLDivElement>(null);
+  const runMenuRef = useRef<HTMLDivElement>(null);
+  const helpMenuRef = useRef<HTMLDivElement>(null);
+  const viewMenuRef = useRef<HTMLDivElement>(null);
   
   const { openFile, closeFile, closeAllFiles, activeFile, setCommandPaletteOpen, openedHistory, toggleCopilot } = useStore();
 
@@ -22,12 +28,24 @@ export default function TitleBar() {
       if (editMenuRef.current && !editMenuRef.current.contains(event.target as Node)) {
         setIsEditMenuOpen(false);
       }
+      if (runMenuRef.current && !runMenuRef.current.contains(event.target as Node)) {
+        setIsRunMenuOpen(false);
+      }
+      if (helpMenuRef.current && !helpMenuRef.current.contains(event.target as Node)) {
+        setIsHelpMenuOpen(false);
+      }
+      if (viewMenuRef.current && !viewMenuRef.current.contains(event.target as Node)) {
+        setIsViewMenuOpen(false);
+      }
     }
     
     function handleKeyDown(event: KeyboardEvent) {
       if (event.key === 'Escape') {
         setIsFileMenuOpen(false);
         setIsEditMenuOpen(false);
+        setIsRunMenuOpen(false);
+        setIsHelpMenuOpen(false);
+        setIsViewMenuOpen(false);
       }
       if (event.ctrlKey && event.key.toLowerCase() === 'a') {
         const tagName = document.activeElement?.tagName.toLowerCase();
@@ -116,19 +134,21 @@ export default function TitleBar() {
           {menus.map((menu) => (
             <div 
               key={menu} 
-              ref={menu === 'File' ? fileMenuRef : menu === 'Edit' ? editMenuRef : null}
-              className={`flex h-full items-center px-2 cursor-pointer hover:bg-white/10 rounded-md transition-colors my-[2px] relative ${(menu === 'File' && isFileMenuOpen) || (menu === 'Edit' && isEditMenuOpen) ? 'bg-white/10' : ''}`}
+              ref={menu === 'File' ? fileMenuRef : menu === 'Edit' ? editMenuRef : menu === 'Run' ? runMenuRef : menu === 'Help' ? helpMenuRef : menu === 'View' ? viewMenuRef : null}
+              className={`flex h-full items-center px-2 cursor-pointer hover:bg-white/10 rounded-md transition-colors my-[2px] relative ${(menu === 'File' && isFileMenuOpen) || (menu === 'Edit' && isEditMenuOpen) || (menu === 'Run' && isRunMenuOpen) || (menu === 'Help' && isHelpMenuOpen) || (menu === 'View' && isViewMenuOpen) ? 'bg-white/10' : ''}`}
               onClick={() => {
-                if (menu === 'File') {
-                  setIsFileMenuOpen(!isFileMenuOpen);
-                  setIsEditMenuOpen(false);
-                } else if (menu === 'Edit') {
-                  setIsEditMenuOpen(!isEditMenuOpen);
-                  setIsFileMenuOpen(false);
-                } else if (menu === 'Copilot') {
+                setIsFileMenuOpen(menu === 'File' ? !isFileMenuOpen : false);
+                setIsEditMenuOpen(menu === 'Edit' ? !isEditMenuOpen : false);
+                setIsRunMenuOpen(menu === 'Run' ? !isRunMenuOpen : false);
+                setIsHelpMenuOpen(menu === 'Help' ? !isHelpMenuOpen : false);
+                setIsViewMenuOpen(menu === 'View' ? !isViewMenuOpen : false);
+
+                if (menu === 'Copilot') {
                   toggleCopilot();
-                  setIsFileMenuOpen(false);
-                  setIsEditMenuOpen(false);
+                } else if (menu === 'Go') {
+                  setCommandPaletteOpen(true);
+                } else if (menu === 'Terminal') {
+                  useStore.getState().toggleTerminal();
                 }
               }}
             >
@@ -195,6 +215,125 @@ export default function TitleBar() {
                   <div className="px-6 py-1.5 hover:bg-[#2a2d2e] cursor-pointer flex justify-between items-center transition-colors" onClick={() => handleEditMenuClick('copy')}>
                     <span>Copy</span>
                     <span className="text-[#858585] text-xs">Ctrl+C</span>
+                  </div>
+                </div>
+              )}
+
+              {/* View Menu Dropdown */}
+              {menu === 'View' && isViewMenuOpen && (
+                <div 
+                  className="absolute top-full left-0 mt-1 w-64 bg-[#252526] border border-[#454545] rounded-md shadow-2xl py-1 z-50 text-[13px] text-[#cccccc] flex flex-col cursor-default" 
+                  onClick={e => e.stopPropagation()}
+                >
+                  <div className="px-6 py-1.5 hover:bg-[#04395e] cursor-pointer flex justify-between items-center transition-colors" onClick={() => { setCommandPaletteOpen(true); setIsViewMenuOpen(false); }}>
+                    <span>Command Palette</span>
+                    <span className="text-[#858585] text-xs">Ctrl+P</span>
+                  </div>
+                  
+                  <div className="h-[1px] bg-[#454545] my-1 mx-2"></div>
+                  
+                  <div className="px-6 py-1.5 hover:bg-[#04395e] cursor-pointer flex justify-between items-center transition-colors" onClick={() => { 
+                    const state = useStore.getState();
+                    state.setActiveSidebarPanel(state.activeSidebarPanel ? null : 'explorer');
+                    setIsViewMenuOpen(false); 
+                  }}>
+                    <span>Toggle Sidebar</span>
+                    <span className="text-[#858585] text-xs">Ctrl+B</span>
+                  </div>
+                  <div className="px-6 py-1.5 hover:bg-[#04395e] cursor-pointer flex justify-between items-center transition-colors" onClick={() => { useStore.getState().toggleTerminal(); setIsViewMenuOpen(false); }}>
+                    <span>Toggle Terminal</span>
+                    <span className="text-[#858585] text-xs">Ctrl+`</span>
+                  </div>
+                  <div className="px-6 py-1.5 hover:bg-[#04395e] cursor-pointer flex justify-between items-center transition-colors text-[#c586c0]" onClick={() => { useStore.getState().toggleCopilot(); setIsViewMenuOpen(false); }}>
+                    <span>✨ Surya's Copilot</span>
+                    <span className="text-[#858585] text-xs">Ctrl+Shift+C</span>
+                  </div>
+                  
+                  <div className="h-[1px] bg-[#454545] my-1 mx-2"></div>
+                  
+                  <div className="px-6 py-1.5 hover:bg-[#04395e] cursor-pointer flex justify-between items-center transition-colors" onClick={() => { 
+                    if (!document.fullscreenElement) {
+                      document.documentElement.requestFullscreen().catch(err => console.error(err));
+                    } else {
+                      if (document.exitFullscreen) {
+                        document.exitFullscreen();
+                      }
+                    }
+                    setIsViewMenuOpen(false); 
+                  }}>
+                    <span>Enter Full Screen</span>
+                    <span className="text-[#858585] text-xs">F11</span>
+                  </div>
+                  <div className="px-6 py-1.5 hover:bg-[#04395e] cursor-pointer flex justify-between items-center transition-colors" onClick={() => { setIsViewMenuOpen(false); }}>
+                    <span>Zoom In</span>
+                    <span className="text-[#858585] text-xs">Ctrl++</span>
+                  </div>
+                  <div className="px-6 py-1.5 hover:bg-[#04395e] cursor-pointer flex justify-between items-center transition-colors" onClick={() => { setIsViewMenuOpen(false); }}>
+                    <span>Zoom Out</span>
+                    <span className="text-[#858585] text-xs">Ctrl+-</span>
+                  </div>
+                  <div className="px-6 py-1.5 hover:bg-[#04395e] cursor-pointer transition-colors" onClick={() => { setIsViewMenuOpen(false); }}>
+                    Reset Zoom
+                  </div>
+                </div>
+              )}
+
+              {/* Run Menu Dropdown */}
+              {menu === 'Run' && isRunMenuOpen && (
+                <div 
+                  className="absolute top-full left-0 mt-1 w-64 bg-[#252526] border border-[#454545] rounded-md shadow-2xl py-1 z-50 text-[13px] text-[#cccccc] flex flex-col cursor-default" 
+                  onClick={e => e.stopPropagation()}
+                >
+                  <div className="px-6 py-1.5 hover:bg-[#04395e] cursor-pointer flex justify-between items-center transition-colors" onClick={() => { useStore.getState().toggleTerminal(); setIsRunMenuOpen(false); }}>
+                    <span>Start Terminal</span>
+                    <span className="text-[#858585] text-xs">Ctrl+`</span>
+                  </div>
+                  <div className="px-6 py-1.5 text-[#555555] cursor-default flex justify-between items-center">
+                    <span>Run Last Command</span>
+                  </div>
+                </div>
+              )}
+
+              {/* Help Menu Dropdown */}
+              {menu === 'Help' && isHelpMenuOpen && (
+                <div 
+                  className="absolute top-full left-0 mt-1 w-72 bg-[#252526] border border-[#454545] rounded-md shadow-2xl py-1 z-50 text-[13px] text-[#cccccc] flex flex-col cursor-default" 
+                  onClick={e => e.stopPropagation()}
+                >
+                  <div className="px-6 py-1.5 hover:bg-[#04395e] cursor-pointer flex justify-between items-center transition-colors" onClick={() => { setCommandPaletteOpen(true); setIsHelpMenuOpen(false); }}>
+                    <span>Command Palette</span>
+                    <span className="text-[#858585] text-xs">Ctrl+P</span>
+                  </div>
+                  
+                  <div className="h-[1px] bg-[#454545] my-1 mx-2"></div>
+                  
+                  <div className="px-6 py-1 text-[10px] text-[#858585] uppercase tracking-wider font-semibold">KEYBOARD SHORTCUTS</div>
+                  
+                  <div className="px-6 py-1.5 flex justify-start items-center">
+                    <span className="bg-[#3c3c3c] border border-[#454545] rounded px-1.5 py-0.5 text-[#cccccc] text-[11px] min-w-[45px] text-center mr-3 font-mono shadow-sm">Ctrl+P</span>
+                    <span className="text-[#858585]">Go to file</span>
+                  </div>
+                  <div className="px-6 py-1.5 flex justify-start items-center">
+                    <span className="bg-[#3c3c3c] border border-[#454545] rounded px-1.5 py-0.5 text-[#cccccc] text-[11px] min-w-[45px] text-center mr-3 font-mono shadow-sm">Ctrl+B</span>
+                    <span className="text-[#858585]">Toggle sidebar</span>
+                  </div>
+                  <div className="px-6 py-1.5 flex justify-start items-center">
+                    <span className="bg-[#3c3c3c] border border-[#454545] rounded px-1.5 py-0.5 text-[#cccccc] text-[11px] min-w-[45px] text-center mr-3 font-mono shadow-sm">Ctrl+`</span>
+                    <span className="text-[#858585]">Toggle terminal</span>
+                  </div>
+                  <div className="px-6 py-1.5 flex justify-start items-center">
+                    <span className="bg-[#3c3c3c] border border-[#454545] rounded px-1.5 py-0.5 text-[#cccccc] text-[11px] text-center mr-3 font-mono whitespace-nowrap shadow-sm">Ctrl+Shift+C</span>
+                    <span className="text-[#858585]">Toggle Copilot ✨</span>
+                  </div>
+                  <div className="px-6 py-1.5 flex justify-start items-center">
+                    <span className="bg-[#3c3c3c] border border-[#454545] rounded px-1.5 py-0.5 text-[#cccccc] text-[11px] min-w-[45px] text-center mr-3 font-mono shadow-sm">Esc</span>
+                    <span className="text-[#858585]">Close overlay</span>
+                  </div>
+                  
+                  <div className="h-[1px] bg-[#454545] my-1 mx-2"></div>
+                  
+                  <div className="px-6 py-1.5 hover:bg-[#04395e] cursor-pointer transition-colors" onClick={() => { useStore.getState().openFile('about.ts'); setIsHelpMenuOpen(false); }}>
+                    About
                   </div>
                 </div>
               )}

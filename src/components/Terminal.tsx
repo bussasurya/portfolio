@@ -17,19 +17,73 @@ export default function Terminal() {
 
   const handleCommand = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter') {
-      const cmd = input.trim();
-      addTerminalHistory(`PS C:\\Users\\surya\\portfolio> ${cmd}`);
+      const cmdString = input.trim();
+      addTerminalHistory(`bussasurya@portfolio:~$ ${cmdString}`);
       
+      const args = cmdString.split(' ');
+      const cmd = args[0].toLowerCase();
+      const arg1 = args.slice(1).join(' ');
+
       if (cmd === 'clear') {
-        useStore.setState({ terminalHistory: [] });
+        useStore.setState({ terminalHistory: ["Welcome! Type 'help' to see available commands."] });
+      } else if (cmd === 'help') {
+        addTerminalHistory(`Available commands:
+ls — list files in current directory
+pwd — print working directory
+cd <dir> — change directory (cd .. to go up)
+cat <file> — view / open a file in the editor
+open <file> — same as cat
+whoami — who am I?
+echo <text> — print text
+date — show current date & time
+git log — show recent commits
+python --version — show Python version
+clear — clear the terminal`);
+      } else if (cmd === 'ls') {
+        addTerminalHistory('home.tsx  about.ts  projects.js  skills.json  experience.tsx  contact.css');
+      } else if (cmd === 'pwd') {
+        addTerminalHistory('/home/bussasurya/portfolio');
+      } else if (cmd === 'cd') {
+        if (!arg1 || arg1 === '~') {
+          // do nothing, conceptually moved to ~
+        } else if (arg1 === '..') {
+          addTerminalHistory('Cannot go up from root directory in this simulation.');
+        } else {
+          addTerminalHistory(`bash: cd: ${arg1}: No such file or directory`);
+        }
+      } else if (cmd === 'cat' || cmd === 'open') {
+        if (!arg1) {
+          addTerminalHistory(`${cmd}: missing file operand`);
+        } else if (['home.tsx', 'about.ts', 'projects.js', 'skills.json', 'experience.tsx', 'contact.css'].includes(arg1)) {
+          useStore.getState().openFile(arg1);
+          addTerminalHistory(`Opened ${arg1} in the editor.`);
+        } else {
+          addTerminalHistory(`${cmd}: ${arg1}: No such file or directory`);
+        }
       } else if (cmd === 'whoami') {
-        addTerminalHistory('Surya - Developer building web experiences.');
-      } else if (cmd === 'projects') {
-        addTerminalHistory('1. VS Code Portfolio\\n2. DSA Mentorship Platform\\n3. Space Portfolio 3D');
-      } else if (cmd === 'contact') {
-        addTerminalHistory('Email: surya@example.com | GitHub: @surya');
+        addTerminalHistory('bussasurya');
+      } else if (cmd === 'echo') {
+        addTerminalHistory(arg1);
+      } else if (cmd === 'date') {
+        addTerminalHistory(new Date().toString());
+      } else if (cmd === 'git') {
+        if (arg1 === 'log') {
+          addTerminalHistory(`commit 9f8a3b2e (HEAD -> main)
+Author: Surya
+Date:   ${new Date().toDateString()}
+
+    Initial commit: Built amazing VS Code Portfolio`);
+        } else {
+          addTerminalHistory(`git: '${arg1}' is not a git command. See 'git --help'.`);
+        }
+      } else if (cmd === 'python') {
+        if (arg1 === '--version') {
+          addTerminalHistory('Python 3.10.12');
+        } else {
+          addTerminalHistory(`python: can't open file '${arg1}': [Errno 2] No such file or directory`);
+        }
       } else if (cmd !== '') {
-        addTerminalHistory(`Command not found: ${cmd}. Type "whoami", "projects", "contact" or "clear".`);
+        addTerminalHistory(`bash: ${cmd}: command not found`);
       }
       
       setInput('');
@@ -66,7 +120,7 @@ export default function Terminal() {
               <div key={i} className="whitespace-pre-wrap leading-[1.4] mb-0.5">{line}</div>
             ))}
             <div className="flex flex-wrap items-center mt-0.5">
-              <span className="text-[#4af626] mr-2">PS C:\\Users\\surya\\portfolio&gt;</span>
+              <span className="text-[#4af626] mr-2">bussasurya@portfolio:~$</span>
               <input
                 type="text"
                 value={input}

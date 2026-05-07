@@ -31,8 +31,7 @@ export const useStore = create<StoreState>((set) => ({
   isCopilotOpen: false,
   commandPaletteOpen: false,
   terminalHistory: [
-    'Welcome to the VS Code Terminal.',
-    'Type "help" to see available commands.'
+    "Welcome! Type 'help' to see available commands."
   ],
   openedHistory: [],
 
