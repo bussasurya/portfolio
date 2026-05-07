@@ -16,7 +16,7 @@ export default function CopilotPanel() {
   ];
 
   return (
-    <div className="flex select-none h-full bg-[#252526] text-[#cccccc] w-[280px] flex-shrink-0 flex-col border-l border-[#2b2b2b]">
+    <div className="flex select-none h-full bg-[#252526] text-[#cccccc] w-[calc(100vw-48px)] md:w-[280px] flex-shrink-0 flex-col border-l border-[#2b2b2b]">
       {/* Header */}
       <div className="flex items-center justify-between px-4 py-2 text-[11px] uppercase tracking-wide text-[#bbbbbb] shrink-0 font-semibold mb-1">
         <span>Surya's Copilot</span>

@@ -204,8 +204,8 @@ export default function TitleBar() {
       </div>
 
       {/* Center Search / Title */}
-      <div className="absolute left-1/2 -translate-x-1/2 flex items-center justify-center pointer-events-auto">
-        <div className="flex items-center bg-[#2d2d2d] border border-[#3c3c3c] hover:border-[#555555] rounded-md px-32 py-[2px] transition-colors cursor-text max-w-[40vw]">
+      <div className="absolute left-1/2 -translate-x-1/2 flex items-center justify-center pointer-events-auto w-[60%] sm:w-auto">
+        <div className="flex items-center bg-[#2d2d2d] border border-[#3c3c3c] hover:border-[#555555] rounded-md px-4 sm:px-16 md:px-32 py-[2px] transition-colors cursor-text w-full sm:w-auto max-w-full md:max-w-[40vw] justify-center">
           <span className="text-[#858585] truncate text-[12px]">Surya - Visual Studio Code</span>
         </div>
       </div>

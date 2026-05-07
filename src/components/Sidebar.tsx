@@ -9,7 +9,7 @@ export default function Sidebar() {
   const [isOpen, setIsOpen] = useState(true);
 
   return (
-    <div className="flex select-none h-full bg-[#252526] text-[#cccccc] w-[250px] flex-shrink-0 flex-col border-r border-[#2b2b2b] subheading-font">
+    <div className="flex select-none h-full bg-[#252526] text-[#cccccc] w-[calc(100vw-48px)] md:w-[250px] flex-shrink-0 flex-col border-r border-[#2b2b2b] subheading-font">
       {/* Top Header */}
       <div className="flex items-center justify-between px-5 py-3 text-[11px] uppercase tracking-wide text-[#bbbbbb] shrink-0 font-semibold mb-2">
         <span>Explorer</span>

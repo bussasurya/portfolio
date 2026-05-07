@@ -22,15 +22,23 @@ export default function AppLayout() {
         <ActivityBar />
         
         {/* Dynamic Left Sidebar Outlet */}
-        {activeSidebarPanel === 'explorer' && <Sidebar />}
+        {activeSidebarPanel === 'explorer' && (
+          <div className="absolute left-[48px] z-40 h-full shadow-2xl md:relative md:left-0 md:shadow-none">
+            <Sidebar />
+          </div>
+        )}
         {activeSidebarPanel === 'search' && (
-          <div className="flex select-none h-full bg-[#252526] text-[#cccccc] w-[250px] flex-shrink-0 flex-col border-r border-[#2b2b2b] p-4 text-[13px]">
-            Search Panel Placeholder
+          <div className="absolute left-[48px] z-40 h-full shadow-2xl md:relative md:left-0 md:shadow-none">
+            <div className="flex select-none h-full bg-[#252526] text-[#cccccc] w-[calc(100vw-48px)] md:w-[250px] flex-shrink-0 flex-col border-r border-[#2b2b2b] p-4 text-[13px]">
+              Search Panel Placeholder
+            </div>
           </div>
         )}
         {activeSidebarPanel === 'sourceControl' && (
-          <div className="flex select-none h-full bg-[#252526] text-[#cccccc] w-[250px] flex-shrink-0 flex-col border-r border-[#2b2b2b] p-4 text-[13px]">
-            Source Control Placeholder
+          <div className="absolute left-[48px] z-40 h-full shadow-2xl md:relative md:left-0 md:shadow-none">
+            <div className="flex select-none h-full bg-[#252526] text-[#cccccc] w-[calc(100vw-48px)] md:w-[250px] flex-shrink-0 flex-col border-r border-[#2b2b2b] p-4 text-[13px]">
+              Source Control Placeholder
+            </div>
           </div>
         )}
         
@@ -47,7 +55,11 @@ export default function AppLayout() {
         </div>
 
         {/* Dynamic Right Copilot Panel */}
-        {isCopilotOpen && <CopilotPanel />}
+        {isCopilotOpen && (
+          <div className="absolute right-0 z-40 h-full shadow-2xl md:relative md:shadow-none">
+            <CopilotPanel />
+          </div>
+        )}
       </div>
 
       <StatusBar />

@@ -46,15 +46,15 @@ export default function Terminal() {
           transition={{ duration: 0.15, ease: "easeOut" }}
           className="border-t border-[#3c3c3c] bg-[#1e1e1e] flex flex-col shrink-0 overflow-hidden w-full z-10"
         >
-          <div className="flex items-center justify-between px-4 py-2 text-[11px] text-[#cccccc] border-b border-[#2b2b2b] bg-[#1e1e1e]">
-            <div className="flex space-x-6 uppercase tracking-widest font-semibold text-[#858585]">
+          <div className="flex items-center justify-between px-4 py-2 text-[11px] text-[#cccccc] border-b border-[#2b2b2b] bg-[#1e1e1e] overflow-x-auto hide-scrollbar">
+            <div className="flex space-x-6 uppercase tracking-widest font-semibold text-[#858585] whitespace-nowrap">
               <span className="cursor-pointer hover:text-[#cccccc]">Problems <span className="opacity-60 font-normal">0</span></span>
               <span className="cursor-pointer hover:text-[#cccccc]">Output</span>
               <span className="cursor-pointer hover:text-[#cccccc]">Debug Console</span>
               <span className="cursor-pointer text-[#cccccc] border-b-[1px] cursor-default border-[#007acc] pb-1">Terminal</span>
               <span className="cursor-pointer hover:text-[#cccccc]">Ports</span>
             </div>
-            <div className="flex items-center space-x-3 text-base text-[#858585]">
+            <div className="flex items-center space-x-3 text-base text-[#858585] ml-4 shrink-0">
               <VscTrash className="cursor-pointer hover:text-[#cccccc] transition-colors" onClick={() => useStore.setState({ terminalHistory: [] })} />
               <VscChevronUp className="cursor-pointer hover:text-[#cccccc] transition-colors" />
               <VscChevronDown className="cursor-pointer hover:text-[#cccccc] transition-colors" />

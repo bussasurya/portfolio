@@ -24,22 +24,22 @@ export default function StatusBar() {
       </div>
       
       <div className="flex h-full items-center pr-2">
-        <div className="cursor-pointer hover:bg-white/20 px-2 flex items-center h-full transition-colors pt-[1px]">
+        <div className="hidden md:flex cursor-pointer hover:bg-white/20 px-2 items-center h-full transition-colors pt-[1px]">
           Ln 1, Col 1
         </div>
-        <div className="cursor-pointer hover:bg-white/20 px-2 flex items-center h-full transition-colors pt-[1px]">
+        <div className="hidden md:flex cursor-pointer hover:bg-white/20 px-2 items-center h-full transition-colors pt-[1px]">
           Spaces: 2
         </div>
-        <div className="cursor-pointer hover:bg-white/20 px-2 flex items-center h-full transition-colors pt-[1px]">
+        <div className="hidden md:flex cursor-pointer hover:bg-white/20 px-2 items-center h-full transition-colors pt-[1px]">
           UTF-8
         </div>
-        <div className="cursor-pointer hover:bg-white/20 px-2 flex items-center h-full transition-colors pt-[1px]">
+        <div className="hidden md:flex cursor-pointer hover:bg-white/20 px-2 items-center h-full transition-colors pt-[1px]">
           CRLF
         </div>
         <div className="cursor-pointer hover:bg-white/20 px-2 flex items-center h-full transition-colors pt-[1px]">
           {file ? ('{' + file.language + '}') : '{typescriptreact}'}
         </div>
-        <div className="cursor-pointer hover:bg-white/20 px-2 flex items-center h-full space-x-1 transition-colors">
+        <div className="hidden md:flex cursor-pointer hover:bg-white/20 px-2 items-center h-full space-x-1 transition-colors">
           <VscCheckAll className="text-[14px]" /> <span className="pt-[1px]">Prettier</span>
         </div>
         <div className="cursor-pointer hover:bg-white/20 px-2 flex items-center h-full transition-colors">
