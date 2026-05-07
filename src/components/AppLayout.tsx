@@ -15,10 +15,10 @@ export default function AppLayout() {
   const { activeSidebarPanel, isCopilotOpen } = useStore();
 
   return (
-    <div className="flex h-screen w-screen flex-col overflow-hidden bg-[#1e1e1e] font-sans text-[#cccccc] select-none">
+    <div className="flex h-[100dvh] w-[100dvw] flex-col overflow-hidden bg-[#1e1e1e] font-sans text-[#cccccc] select-none">
       <TitleBar />
 
-      <div className="flex flex-1 overflow-hidden">
+      <div className="flex flex-1 overflow-hidden relative">
         <ActivityBar />
         
         {/* Dynamic Left Sidebar Outlet */}

@@ -109,7 +109,7 @@ export default function TitleBar() {
   const displayRecent = recentFiles.length > 0 ? recentFiles : ['home.tsx', 'about.ts', 'projects.js', 'skills.json'];
 
   return (
-    <div className="flex h-[28px] w-full shrink-0 select-none items-center justify-between bg-[#181818] text-[#cccccc] text-[13px] border-b border-[#2b2b2b]">
+    <div className="relative flex h-[28px] w-full shrink-0 select-none items-center justify-between bg-[#181818] text-[#cccccc] text-[13px] border-b border-[#2b2b2b]">
       {/* Left Menu Section */}
       <div className="flex h-full items-center pl-1">
         <div className="hidden md:flex h-full items-center subheading-font">
