@@ -5,8 +5,15 @@ import { useStore } from '../store/useStore';
 import { useState } from 'react';
 
 export default function Sidebar() {
-  const { activeFile, openFile } = useStore();
+  const { activeFile, openFile, setActiveSidebarPanel } = useStore();
   const [isOpen, setIsOpen] = useState(true);
+
+  const handleFileClick = (fileName: string) => {
+    openFile(fileName);
+    if (window.innerWidth < 768) {
+      setActiveSidebarPanel(null);
+    }
+  };
 
   return (
     <div className="flex select-none h-full bg-[#252526] text-[#cccccc] w-[calc(100vw-48px)] md:w-[250px] flex-shrink-0 flex-col border-r border-[#2b2b2b] subheading-font">
@@ -44,7 +51,7 @@ export default function Sidebar() {
                 return (
                   <div
                     key={file.name}
-                    onClick={() => openFile(file.name)}
+                    onClick={() => handleFileClick(file.name)}
                     className={`flex items-center py-[3px] pl-[44px] pr-2 cursor-pointer text-[13px] transition-colors ${
                       isActive ? 'bg-[#37373d] text-white' : 'hover:bg-[#2a2d2e] text-[#858585]'
                     }`}

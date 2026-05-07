@@ -39,7 +39,7 @@ export default function ActivityBar() {
         <div 
           title="Explorer"
           className={`cursor-pointer text-[24px] relative w-full flex justify-center py-3 transition-colors ${getIconClass('explorer')}`}
-          onClick={() => setActiveSidebarPanel('explorer')}
+          onClick={() => setActiveSidebarPanel(activeSidebarPanel === 'explorer' ? null : 'explorer')}
         >
           <VscFiles />
           {renderActiveBorder('explorer')}
@@ -47,7 +47,7 @@ export default function ActivityBar() {
         <div 
           title="Search"
           className={`cursor-pointer text-[24px] relative w-full flex justify-center py-3 transition-colors ${getIconClass('search')}`}
-          onClick={() => setActiveSidebarPanel('search')}
+          onClick={() => setActiveSidebarPanel(activeSidebarPanel === 'search' ? null : 'search')}
         >
           <VscSearch />
           {renderActiveBorder('search')}
@@ -55,7 +55,7 @@ export default function ActivityBar() {
         <div 
           title="Source Control"
           className={`cursor-pointer text-[24px] relative w-full flex justify-center py-3 transition-colors ${getIconClass('sourceControl')}`}
-          onClick={() => setActiveSidebarPanel('sourceControl')}
+          onClick={() => setActiveSidebarPanel(activeSidebarPanel === 'sourceControl' ? null : 'sourceControl')}
         >
           <VscSourceControl />
           <div className="absolute top-3 right-2 flex items-center justify-center bg-[#007acc] text-white text-[9px] rounded-full w-[14px] h-[14px]">

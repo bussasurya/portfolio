@@ -3,7 +3,7 @@ import { create } from 'zustand';
 interface StoreState {
   openedFiles: string[];
   activeFile: string | null;
-  activeSidebarPanel: 'explorer' | 'search' | 'sourceControl';
+  activeSidebarPanel: 'explorer' | 'search' | 'sourceControl' | null;
   isTerminalOpen: boolean;
   isCopilotOpen: boolean;
   commandPaletteOpen: boolean;
@@ -15,7 +15,7 @@ interface StoreState {
   closeFile: (fileName: string) => void;
   closeAllFiles: () => void;
   setActiveFile: (fileName: string) => void;
-  setActiveSidebarPanel: (panel: 'explorer' | 'search' | 'sourceControl') => void;
+  setActiveSidebarPanel: (panel: 'explorer' | 'search' | 'sourceControl' | null) => void;
   toggleTerminal: () => void;
   toggleCopilot: () => void;
   setCommandPaletteOpen: (isOpen: boolean) => void;
