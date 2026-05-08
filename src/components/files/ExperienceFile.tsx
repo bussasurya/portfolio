@@ -55,7 +55,7 @@ const hackathons = [
     }
   },
   {
-    project: "FramFlow",
+    project: "FarmFlow",
     name: "EvoLumin Hackathon",
     year: "2024",
     description: "Built a farmer-centric platform integrating real-time weather forecasts, pest identification, and market insights.",
