@@ -114,7 +114,7 @@ export default function AppLayout() {
 
             {/* Stats Row */}
             <div className="flex flex-col gap-2.5 py-4 border-b border-[#2d2d2d]">
-              <div className="text-[#858585] text-[11px] uppercase tracking-wider font-semibold">Repository Status (Mock)</div>
+              <div className="text-[#858585] text-[11px] uppercase tracking-wider font-semibold">Repository Status </div>
               <div className="grid grid-cols-3 gap-2.5 text-center text-xs">
                 <div className="bg-[#2d2d2d] rounded py-2 border border-[#3c3c3c]">
                   <div className="text-[#e2c08d] font-bold text-sm">3</div>
