@@ -16,7 +16,7 @@ export default function TitleBar() {
   const helpMenuRef = useRef<HTMLDivElement>(null);
   const viewMenuRef = useRef<HTMLDivElement>(null);
   
-  const { openFile, closeFile, closeAllFiles, activeFile, setCommandPaletteOpen, openedHistory, toggleCopilot } = useStore();
+  const { openFile, closeFile, closeAllFiles, activeFile, setCommandPaletteOpen, openedHistory, toggleCopilot, zoomIn, zoomOut, resetZoom } = useStore();
 
   const menus = ["File", "Edit", "View", "Go", "Run", "Terminal", "Help", "Copilot"];
 
@@ -222,7 +222,7 @@ export default function TitleBar() {
               {/* View Menu Dropdown */}
               {menu === 'View' && isViewMenuOpen && (
                 <div 
-                  className="absolute top-full left-0 mt-1 w-64 bg-[#252526] border border-[#454545] rounded-md shadow-2xl py-1 z-50 text-[13px] text-[#cccccc] flex flex-col cursor-default" 
+                  className="absolute top-full left-0 mt-1 w-[290px] bg-[#252526] border border-[#454545] rounded-md shadow-2xl py-1 z-50 text-[13px] text-[#cccccc] flex flex-col cursor-default" 
                   onClick={e => e.stopPropagation()}
                 >
                   <div className="px-6 py-1.5 hover:bg-[#04395e] cursor-pointer flex justify-between items-center transition-colors" onClick={() => { setCommandPaletteOpen(true); setIsViewMenuOpen(false); }}>
@@ -244,9 +244,9 @@ export default function TitleBar() {
                     <span>Toggle Terminal</span>
                     <span className="text-[#858585] text-xs">Ctrl+`</span>
                   </div>
-                  <div className="px-6 py-1.5 hover:bg-[#04395e] cursor-pointer flex justify-between items-center transition-colors text-[#c586c0]" onClick={() => { useStore.getState().toggleCopilot(); setIsViewMenuOpen(false); }}>
-                    <span>✨ Surya's Copilot</span>
-                    <span className="text-[#858585] text-xs">Ctrl+Shift+C</span>
+                  <div className="px-6 py-1.5 hover:bg-[#04395e] cursor-pointer flex justify-between items-center transition-colors text-[#c586c0] whitespace-nowrap gap-4" onClick={() => { toggleCopilot(); setIsViewMenuOpen(false); }}>
+                    <span className="whitespace-nowrap">✨Surya's Copilot</span>
+                    <span className="text-[#858585] text-xs whitespace-nowrap">Ctrl+Shift+C</span>
                   </div>
                   
                   <div className="h-[1px] bg-[#454545] my-1 mx-2"></div>
@@ -264,15 +264,15 @@ export default function TitleBar() {
                     <span>Enter Full Screen</span>
                     <span className="text-[#858585] text-xs">F11</span>
                   </div>
-                  <div className="px-6 py-1.5 hover:bg-[#04395e] cursor-pointer flex justify-between items-center transition-colors" onClick={() => { setIsViewMenuOpen(false); }}>
+                  <div className="px-6 py-1.5 hover:bg-[#04395e] cursor-pointer flex justify-between items-center transition-colors" onClick={() => { zoomIn(); setIsViewMenuOpen(false); }}>
                     <span>Zoom In</span>
                     <span className="text-[#858585] text-xs">Ctrl++</span>
                   </div>
-                  <div className="px-6 py-1.5 hover:bg-[#04395e] cursor-pointer flex justify-between items-center transition-colors" onClick={() => { setIsViewMenuOpen(false); }}>
+                  <div className="px-6 py-1.5 hover:bg-[#04395e] cursor-pointer flex justify-between items-center transition-colors" onClick={() => { zoomOut(); setIsViewMenuOpen(false); }}>
                     <span>Zoom Out</span>
                     <span className="text-[#858585] text-xs">Ctrl+-</span>
                   </div>
-                  <div className="px-6 py-1.5 hover:bg-[#04395e] cursor-pointer transition-colors" onClick={() => { setIsViewMenuOpen(false); }}>
+                  <div className="px-6 py-1.5 hover:bg-[#04395e] cursor-pointer transition-colors" onClick={() => { resetZoom(); setIsViewMenuOpen(false); }}>
                     Reset Zoom
                   </div>
                 </div>

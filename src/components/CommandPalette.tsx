@@ -70,6 +70,24 @@ export default function CommandPalette() {
           state.closeFile(state.activeFile);
         }
       }
+
+      // Zoom In (Ctrl + = or Ctrl + +)
+      if (isCmdOrCtrl && (e.key === '=' || e.key === '+' || e.code === 'Equal' || e.code === 'NumpadAdd')) {
+        e.preventDefault();
+        useStore.getState().zoomIn();
+      }
+
+      // Zoom Out (Ctrl + -)
+      if (isCmdOrCtrl && (e.key === '-' || e.code === 'Minus' || e.code === 'NumpadSubtract')) {
+        e.preventDefault();
+        useStore.getState().zoomOut();
+      }
+
+      // Reset Zoom (Ctrl + 0)
+      if (isCmdOrCtrl && (e.key === '0' || e.code === 'Digit0' || e.code === 'Numpad0')) {
+        e.preventDefault();
+        useStore.getState().resetZoom();
+      }
     };
 
     document.addEventListener('keydown', handleGlobalKeyDown, { capture: true });

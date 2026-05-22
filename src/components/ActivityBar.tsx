@@ -4,7 +4,7 @@ import { useStore } from '../store/useStore';
 import { useState } from 'react';
 
 export default function ActivityBar() {
-  const { activeSidebarPanel, setActiveSidebarPanel, isCopilotOpen, toggleCopilot } = useStore();
+  const { activeSidebarPanel, setActiveSidebarPanel, isCopilotOpen, toggleCopilot, commandPaletteOpen, setCommandPaletteOpen, isSourceControlOpen, toggleSourceControl } = useStore();
   const [downloadMsg, setDownloadMsg] = useState(false);
 
   const getIconClass = (panel: string) => {
@@ -46,22 +46,30 @@ export default function ActivityBar() {
         </div>
         <div 
           title="Search"
-          className={`cursor-pointer text-[24px] relative w-full flex justify-center py-3 transition-colors ${getIconClass('search')}`}
-          onClick={() => setActiveSidebarPanel(activeSidebarPanel === 'search' ? null : 'search')}
+          className={`cursor-pointer text-[24px] relative w-full flex justify-center py-3 transition-colors ${
+            commandPaletteOpen ? "text-[#ffffff]" : "text-[#858585] hover:text-[#ffffff]"
+          }`}
+          onClick={() => setCommandPaletteOpen(!commandPaletteOpen)}
         >
           <VscSearch />
-          {renderActiveBorder('search')}
+          {commandPaletteOpen && (
+            <div className="absolute left-0 top-0 h-full w-[2px] bg-[#007acc]"></div>
+          )}
         </div>
         <div 
           title="Source Control"
-          className={`cursor-pointer text-[24px] relative w-full flex justify-center py-3 transition-colors ${getIconClass('sourceControl')}`}
-          onClick={() => setActiveSidebarPanel(activeSidebarPanel === 'sourceControl' ? null : 'sourceControl')}
+          className={`cursor-pointer text-[24px] relative w-full flex justify-center py-3 transition-colors ${
+            isSourceControlOpen ? "text-[#ffffff]" : "text-[#858585] hover:text-[#ffffff]"
+          }`}
+          onClick={() => toggleSourceControl()}
         >
           <VscSourceControl />
           <div className="absolute top-3 right-2 flex items-center justify-center bg-[#007acc] text-white text-[9px] rounded-full w-[14px] h-[14px]">
-            1
+            3
           </div>
-          {renderActiveBorder('sourceControl')}
+          {isSourceControlOpen && (
+            <div className="absolute left-0 top-0 h-full w-[2px] bg-[#007acc]"></div>
+          )}
         </div>
         <div 
           title="Copilot"

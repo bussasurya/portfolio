@@ -21,6 +21,12 @@ interface StoreState {
   setCommandPaletteOpen: (isOpen: boolean) => void;
   addTerminalHistory: (entry: string) => void;
   markAsOpened: (fileName: string) => void;
+  zoomLevel: number;
+  zoomIn: () => void;
+  zoomOut: () => void;
+  resetZoom: () => void;
+  isSourceControlOpen: boolean;
+  toggleSourceControl: () => void;
 }
 
 export const useStore = create<StoreState>((set) => ({
@@ -34,6 +40,8 @@ export const useStore = create<StoreState>((set) => ({
     "Welcome! Type 'help' to see available commands."
   ],
   openedHistory: [],
+  zoomLevel: 1.0,
+  isSourceControlOpen: false,
 
   openFile: (fileName) => set((state) => {
     const newHistory = state.openedHistory.includes(fileName) 
@@ -84,5 +92,10 @@ export const useStore = create<StoreState>((set) => ({
       return { openedHistory: [...state.openedHistory, fileName] };
     }
     return state;
-  })
+  }),
+
+  zoomIn: () => set((state) => ({ zoomLevel: Math.min(2.0, state.zoomLevel + 0.1) })),
+  zoomOut: () => set((state) => ({ zoomLevel: Math.max(0.5, state.zoomLevel - 0.1) })),
+  resetZoom: () => set({ zoomLevel: 1.0 }),
+  toggleSourceControl: () => set((state) => ({ isSourceControlOpen: !state.isSourceControlOpen }))
 }));
