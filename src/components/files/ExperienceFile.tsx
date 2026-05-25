@@ -26,7 +26,7 @@ const hackathons = [
     project: "AeroFlare ",
     name: "CMR HACKFEST 3.0",
     year: "2026",
-    description: "Engineered a real-time 3D geospatial wildfire prediction platform using NASA FIRMS data, achieving 90% directional accuracy.",
+    description: "AeroFlare — real-time wildfire intelligence platform, Top 20 of 400+ teams. Automated pipeline fusing live NASA/NOAA satellite feeds and wind vectors to deliver predictive fire-spread modeling and disaster intelligence.",
     badge: "Top Project 🌟",
     colorTheme: {
       bg: "bg-[#4fc1ff]/10",
