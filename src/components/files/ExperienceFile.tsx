@@ -3,6 +3,23 @@ import { motion, Variants } from 'framer-motion';
 import { Trophy, Award, Briefcase, Star, BookOpen } from 'lucide-react';
 
 const experiences = [
+   {
+  period: "May 2026 – Present",
+  role: "Software Intern,PipeBit",
+  organization: "PipeBit ",
+  description:
+    "Working as a remote Software Intern at PipeBit, contributing to software development projects and gaining hands-on industry experience in scalable application development, collaboration workflows, and modern development practices. Collaborating with the development team on building and maintaining software solutions, participating in technical discussions, and improving problem-solving skills in a professional environment. Engaging in practical learning across software engineering, APIs, backend systems, and deployment workflows while adhering to industry-standard confidentiality and development practices.",
+  tags: [
+    "Software Development",
+    "Backend Development",
+    "APIs",
+    "Remote Collaboration",
+    "Problem Solving",
+    "Git/GitHub",
+    "Teamwork",
+    "Software Engineering"
+  ]
+},
   {
     period: "Jun 2024 – Jul 2025",
     role: "Co-Lead, ACM Glitch",
@@ -20,6 +37,7 @@ const experiences = [
       "Technical Events"
     ]
   }
+ 
 ];
 const hackathons = [
   {
