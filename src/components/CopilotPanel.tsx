@@ -114,7 +114,9 @@ export default function CopilotPanel() {
   const SunAvatar = () => (
     <div className="relative w-16 h-16 flex items-center justify-center">
       <div className="absolute inset-0 rounded-full bg-amber-500/10 blur-xl animate-pulse" />
-      <div className="absolute w-8 h-8 rounded-full bg-gradient-to-tr from-amber-400 to-orange-500 shadow-[0_0_22px_rgba(245,158,11,0.65)]" />
+      <div className="absolute w-8 h-8 rounded-full bg-gradient-to-tr from-amber-400 to-orange-500 shadow-[0_0_22px_rgba(245,158,11,0.65)] flex items-center justify-center text-white font-extrabold text-[14px] select-none leading-none z-10">
+        H
+      </div>
       <svg 
         className="w-16 h-16 text-amber-500" 
         style={{ animation: 'spin 18s linear infinite' }} 
@@ -231,10 +233,8 @@ export default function CopilotPanel() {
               >
                 <div className="flex gap-2 max-w-[92%] items-start">
                   {msg.sender === 'copilot' && (
-                    <div className="w-5 h-5 shrink-0 rounded-full bg-gradient-to-tr from-amber-400 to-orange-500 flex items-center justify-center shadow-[0_0_8px_rgba(245,158,11,0.5)] mt-0.5">
-                      <svg className="w-3 h-3 text-white fill-current animate-pulse" viewBox="0 0 24 24">
-                        <path d="M12 7c-2.76 0-5 2.24-5 5s2.24 5 5 5 5-2.24 5-5-2.24-5-5-5z" />
-                      </svg>
+                    <div className="w-5 h-5 shrink-0 rounded-full bg-gradient-to-tr from-amber-400 to-orange-500 flex items-center justify-center shadow-[0_0_8px_rgba(245,158,11,0.5)] mt-0.5 text-white font-extrabold text-[9px] select-none leading-none">
+                      H
                     </div>
                   )}
                   <div 
@@ -265,10 +265,8 @@ export default function CopilotPanel() {
             {/* AI thinking state */}
             {isThinking && (
               <div className="flex gap-2 max-w-[92%] items-start self-start">
-                <div className="w-5 h-5 shrink-0 rounded-full bg-gradient-to-tr from-amber-400 to-orange-500 flex items-center justify-center shadow-[0_0_8px_rgba(245,158,11,0.5)] mt-0.5 animate-spin">
-                  <svg className="w-3 h-3 text-white fill-current" viewBox="0 0 24 24">
-                    <path d="M12 7c-2.76 0-5 2.24-5 5s2.24 5 5 5 5-2.24 5-5-2.24-5-5-5z" />
-                  </svg>
+                <div className="w-5 h-5 shrink-0 rounded-full bg-gradient-to-tr from-amber-400 to-orange-500 flex items-center justify-center shadow-[0_0_8px_rgba(245,158,11,0.5)] mt-0.5 animate-spin text-white font-extrabold text-[9px] select-none leading-none">
+                  H
                 </div>
                 <div className="rounded px-3 py-2.5 text-xs bg-[#2b271d] text-[#e2c08d] border border-[#d97706]/20 font-bold animate-pulse italic">
                   AI is thinking...
