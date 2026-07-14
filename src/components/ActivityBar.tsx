@@ -31,7 +31,7 @@ export default function ActivityBar() {
       {/* Toast Mock */}
       {downloadMsg && (
         <div className="absolute left-14 bottom-4 bg-[#007acc] text-white text-[11px] px-3 py-1.5 rounded shadow-lg whitespace-nowrap z-50">
-          Downloading resume.pdf...
+          Downloading Surya_Resume.pdf...
         </div>
       )}
 
@@ -85,8 +85,8 @@ export default function ActivityBar() {
         </div>
         {/* Added Download Resume action replacing strictly buggy mock */}
         <a 
-          href="/resume.pdf" 
-          download 
+          href="/Surya_Resume.pdf" 
+          download="Surya_Resume.pdf" 
           title="Download Resume"
           onClick={handleDownload}
           className={`cursor-pointer text-[24px] relative w-full flex justify-center py-3 transition-colors text-[#858585] hover:text-[#ffffff]`}

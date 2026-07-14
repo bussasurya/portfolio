@@ -192,7 +192,7 @@ export default function TitleBar() {
                   
                   <div className="h-[1px] bg-[#454545] my-1 mx-2"></div>
                   
-                  <a href="/resume.pdf" target="_blank" rel="noopener noreferrer" className="px-6 py-1.5 hover:bg-[#04395e] cursor-pointer block text-inherit no-underline transition-colors" onClick={() => setIsFileMenuOpen(false)}>
+                  <a href="/Surya_Resume.pdf" target="_blank" rel="noopener noreferrer" className="px-6 py-1.5 hover:bg-[#04395e] cursor-pointer block text-inherit no-underline transition-colors" onClick={() => setIsFileMenuOpen(false)}>
                     Download Resume
                   </a>
                 </div>
