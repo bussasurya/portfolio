@@ -9,7 +9,13 @@ const socialLinks = [
   { platform: "LinkedIn", url: "linkedin.com/in/bussasurya", href: "https://linkedin.com/in/bussasurya", icon: FaLinkedin, color: "#0077b5" },
   { platform: "GitHub", url: "github.com/bussasurya", href: "https://github.com/bussasurya", icon: FaGithub, color: "#d4d4d4" },
   { platform: "LeetCode", url: "leetcode.com/bussasurya", href: "https://leetcode.com/u/bussasurya/", icon: FaCode, color: "#ffa116" },
-  { platform: "Instagram", url: "instagram.com/surya", href: "https://instagram.com/surya", icon: FaInstagram, color: "#e1306c" }
+ {
+  platform: "Instagram",
+  url: "__surya.12",
+  href: "https://www.instagram.com/__surya.12/",
+  icon: FaInstagram,
+  color: "#E1306C"
+}
 ];
 
 export default function ContactFile({ hasBeenOpened }: { hasBeenOpened: boolean }) {

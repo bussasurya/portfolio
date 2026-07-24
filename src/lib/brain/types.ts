@@ -81,6 +81,7 @@ export interface IMessage {
 export interface IRetrievedDocument {
   document: IContentDocument;
   score: number; // Relevance score (normalized 0.0 - 1.0)
+  reason?: string; // Retrieval explanation for debugging
   matchExplanation?: {
     keywordsMatched: string[];
     metadataHits: number;

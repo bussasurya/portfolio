@@ -9,6 +9,7 @@ priority: high
 tags: [WebGL, Next.js, GIS, ML]
 status: completed
 tech_stack: [WebGL, React, MapLibre GL]
+dependsOn: [skills/react]
 highlights:
   - Engineered geospatial web visualizer for wildfire tracks.
   - Reduced rendering latencies to under 16ms.
