@@ -32,19 +32,18 @@ export default function AppLayout() {
         {/* Mobile Backdrop for Sidebar */}
         {activeSidebarPanel && (
           <div 
-            className="absolute inset-0 z-30 bg-black/50 md:hidden" 
+            className="fixed inset-0 z-30 bg-black/50 md:hidden" 
             onClick={() => useStore.getState().setActiveSidebarPanel(null)}
           />
         )}
         
         {/* Dynamic Left Sidebar Outlet */}
         {activeSidebarPanel === 'explorer' && (
-          <div className="absolute left-[48px] z-40 h-full shadow-2xl md:relative md:left-0 md:shadow-none">
+          <div className="absolute left-[48px] top-0 bottom-0 z-40 h-full shadow-2xl md:relative md:left-0 md:shadow-none">
             <Sidebar />
           </div>
         )}
 
-        
         {/* Main Editor Zone */}
         <div className="flex flex-1 flex-col min-w-0 overflow-hidden relative bg-[#1e1e1e]">
           <Tabs />
@@ -61,10 +60,10 @@ export default function AppLayout() {
         {isCopilotOpen && (
           <>
             <div 
-              className="absolute inset-0 z-30 bg-black/50 md:hidden" 
+              className="fixed inset-0 z-30 bg-black/50 md:hidden" 
               onClick={() => useStore.getState().toggleCopilot()}
             />
-            <div className="absolute right-0 z-40 h-full shadow-2xl md:relative md:shadow-none">
+            <div className="absolute right-0 top-0 bottom-0 z-40 h-full shadow-2xl md:relative md:shadow-none">
               <CopilotPanel />
             </div>
           </>

@@ -10,7 +10,7 @@ export default function Sidebar() {
 
   const handleFileClick = (fileName: string) => {
     openFile(fileName);
-    if (window.innerWidth < 768) {
+    if (typeof window !== 'undefined' && window.innerWidth < 768) {
       setActiveSidebarPanel(null);
     }
   };

@@ -48,14 +48,22 @@ export const useStore = create<StoreState>((set) => ({
       ? state.openedHistory 
       : [...state.openedHistory, fileName];
 
+    const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
+    const nextSidebarPanel = isMobile ? null : state.activeSidebarPanel;
+
     if (!state.openedFiles.includes(fileName)) {
       return { 
         openedFiles: [...state.openedFiles, fileName],
         activeFile: fileName,
-        openedHistory: newHistory
+        openedHistory: newHistory,
+        activeSidebarPanel: nextSidebarPanel
       };
     }
-    return { activeFile: fileName, openedHistory: newHistory };
+    return { 
+      activeFile: fileName, 
+      openedHistory: newHistory,
+      activeSidebarPanel: nextSidebarPanel
+    };
   }),
 
   closeFile: (fileName) => set((state) => {
